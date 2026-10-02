@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Theme Variables ─────────────────────────────────────────────────── */
+@layer base {
+  /* Light mode defaults */
+  :root {
+    --surface-bg: #f8fafc;
+    --surface-card: #ffffff;
+    --surface-card-hover: #f1f5f9;
+    --surface-border: #e2e8f0;
+    --surface-border-light: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #1e293b;
+    --text-muted: #475569;
+    --text-faint: #64748b;
+    --text-inverse: #ffffff;
+    --bb-accent: #2c3e8c;
+    --table-header-bg: #f1f5f9;
+    --skeleton-bg: #e2e8f0;
+    --scrollbar-thumb: #cbd5e1;
+    --scrollbar-hover: #94a3b8;
+    --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+    --shadow-card-hover: 0 4px 12px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+    --hero-metric-color: #2c3e8c;
+    --hero-metric-glow: rgba(44, 62, 140, 0.15);
+    --overlay-hover: rgba(0, 0, 0, 0.03);
+  }
+
+  /* Dark mode overrides */
+  .dark {
+    --surface-bg: #0a0f1a;
+    --surface-card: #111827;
+    --surface-card-hover: #1a2234;
+    --surface-border: #1e293b;
+    --surface-border-light: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #f1f5f9;
+    --text-muted: #cbd5e1;
+    --text-faint: #94a3b8;
+    --text-inverse: #111827;
+    --bb-accent: #8da2e8;
+    --table-header-bg: #0d1321;
+    --skeleton-bg: #1f2937;
+    --scrollbar-thumb: #374151;
+    --scrollbar-hover: #4b5563;
+    --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    --shadow-card-hover: 0 4px 12px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --hero-metric-color: #8da2e8;
+    --hero-metric-glow: rgba(141, 162, 232, 0.2);
+    --overlay-hover: rgba(255, 255, 255, 0.03);
+  }
+
+  html {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--surface-bg);
+    color: var(--text-secondary);
+  }
+}
+
+/* ─── Component Styles (theme-aware) ──────────────────────────────────── */
+@layer components {
+  .card {
+    @apply bg-surface-card rounded-lg border border-surface-border shadow-card;
+  }
+
+  .metric-card {
+    @apply bg-surface-card rounded-lg border border-surface-border p-5
+           shadow-card transition-all duration-200
+           hover:border-surface-border-light hover:shadow-card-hover;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  /* Data Table */
+  .data-table {
+    @apply w-full text-sm text-left;
+  }
+  .data-table thead {
+    background-color: var(--table-header-bg);
+    @apply border-b border-surface-border;
+  }
+  .data-table th {
+    @apply px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.1em];
+    color: var(--text-muted);
+  }
+  .data-table td {
+    @apply px-4 py-3 border-b border-surface-border;
+  }
+  .data-table tbody tr {
+    @apply hover:bg-surface-card-hover transition-colors duration-100;
+  }
+
+  /* Section Card */
+  .section-card {
+    @apply bg-surface-card rounded-lg border border-surface-border shadow-card overflow-hidden;
+  }
+  .section-card-header {
+    @apply px-5 py-4 border-b border-surface-border flex items-center justify-between;
+  }
+  .section-card-body {
+    @apply p-5;
+  }
+
+  /* Pill button */
+  .pill-btn {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium
+           bg-surface-card-hover border border-surface-border
+           transition-all duration-150 cursor-pointer;
+    color: var(--text-secondary);
+  }
+  .pill-btn:hover {
+    border-color: var(--bb-accent);
+    color: var(--bb-accent);
+  }
+  .pill-btn-active {
+    border-color: var(--bb-accent);
+    color: var(--bb-accent);
+    background-color: color-mix(in srgb, var(--bb-accent) 12%, transparent);
+  }
+
+  /* Big hero metric */
+  .hero-metric {
+    @apply text-4xl font-bold tracking-tight;
+    color: var(--hero-metric-color);
+    text-shadow: 0 0 30px var(--hero-metric-glow);
+  }
+}
+
+/* ─── Scrollbar Styling ───────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-hover);
+}
+
+/* ─── Form Controls ───────────────────────────────────────────────────── */
+select,
+input[type="text"],
+input[type="search"],
+textarea {
+  @apply bg-surface-card border-surface-border;
+  color: var(--text-secondary);
+}
+select option {
+  @apply bg-surface-card;
+  color: var(--text-secondary);
+}
+
+/* ─── Print / Save-as-PDF ─────────────────────────────────────────────── */
+@media print {
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+  .fixed {
+    display: none !important;
+  }
+  .ml-16,
+  .ml-56 {
+    margin-left: 0 !important;
+  }
+  :root {
+    --surface-bg: #ffffff;
+    --surface-card: #ffffff;
+    --surface-card-hover: #ffffff;
+    --surface-border: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #1e293b;
+    --text-muted: #334155;
+    --text-faint: #475569;
+    --table-header-bg: #ffffff;
+    --bb-accent: #2c3e8c;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+  }
+  .max-w-4xl,
+  .max-w-5xl,
+  .max-w-6xl,
+  .max-w-7xl {
+    max-width: none !important;
+  }
+  .section-card,
+  .metric-card {
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

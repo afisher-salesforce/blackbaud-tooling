@@ -1,0 +1,95 @@
+{
+  "generatedAt": "2026-10-02T00:00:00.000Z",
+  "note": "Human-reviewed catalog, curated from the Trailhead MCP (content_search) and hand-checked for topical fit. Regenerate the raw pool with `npm run refresh:trailhead`, then review before committing. Slugs with no on-topic match are left empty and the rail degrades gracefully.",
+  "capabilities": {
+    "crm-core": { "query": "Sales Cloud Service Cloud basics", "items": [] },
+    "forecasting": {
+      "query": "Collaborative Forecasting Pipeline Inspection",
+      "items": [
+        { "title": "Salesforce Forecasting", "url": "https://trailhead.salesforce.com/en/content/learn/modules/sales-forecasting", "synopsis": "Drive accurate sales projections and forecast with confidence.", "type": "Module", "level": "Intermediate", "minutes": 30 },
+        { "title": "Sell Smarter with Pipeline Inspection", "url": "https://trailhead.salesforce.com/en/content/learn/modules/sell-smarter-with-pipeline-inspection", "synopsis": "Track pipeline health and inspect deals to coach reps and improve forecast accuracy.", "type": "Module", "level": "Intermediate", "minutes": null },
+        { "title": "Sales Pipeline Basics", "url": "https://trailhead.salesforce.com/en/content/learn/modules/sales-pipeline-basics", "synopsis": "Learn how to manage and grow a healthy sales pipeline.", "type": "Module", "level": "Foundational", "minutes": 15 }
+      ]
+    },
+    "conversation-insights": {
+      "query": "Einstein Conversation Insights",
+      "items": [
+        { "title": "Conversation Intelligence for Sales", "url": "https://trailhead.salesforce.com/en/content/learn/modules/einstein-call-coaching", "synopsis": "Use Conversation Intelligence to automate tasks so you can spend more time selling.", "type": "Module", "level": "Intermediate", "minutes": 15 },
+        { "title": "Conversation Intelligence Setup", "url": "https://trailhead.salesforce.com/en/content/learn/modules/set-up-einstein-conversation-insights", "synopsis": "Learn how Conversation Intelligence can increase productivity for sales teams.", "type": "Module", "level": "Intermediate", "minutes": 30 }
+      ]
+    },
+    "marketing-attribution": { "query": "Marketing Cloud Account Engagement attribution", "items": [] },
+    "sales-engagement": { "query": "Sales Engagement cadences dialer", "items": [] },
+    "marketing-automation": { "query": "Marketing Cloud Account Engagement nurture", "items": [] },
+    "agentforce-service": {
+      "query": "Agentforce Service Agent setup",
+      "items": [
+        { "title": "Agentforce Help Agent", "url": "https://trailhead.salesforce.com/en/content/learn/modules/agentforce-help-agent", "synopsis": "Set up an AI-powered Help Agent for your website, help portal, or voice channel.", "type": "Module", "level": "Intermediate", "minutes": 30 },
+        { "title": "Agentforce: Agent Planning", "url": "https://trailhead.salesforce.com/en/content/learn/modules/agentforce-agent-planning", "synopsis": "Learn best practices for planning an effective, trusted AI agent.", "type": "Module", "level": "Intermediate", "minutes": 55 }
+      ]
+    },
+    "lead-routing": { "query": "Lead assignment routing Salesforce", "items": [] },
+    "scheduler": { "query": "Salesforce Scheduler appointments", "items": [] },
+    "enablement": { "query": "Salesforce Enablement in-app guidance", "items": [] },
+    "sales-navigator": { "query": "LinkedIn Sales Navigator Salesforce integration", "items": [] },
+    "data360": {
+      "query": "Data 360 Data Cloud",
+      "items": [
+        { "title": "Data 360 Insights", "url": "https://trailhead.salesforce.com/en/content/learn/modules/customer-data-platform-insights", "synopsis": "Use your data effectively by creating calculated and real-time insights across unified data.", "type": "Module", "level": "Intermediate", "minutes": 15 },
+        { "title": "Data Cloud One", "url": "https://trailhead.salesforce.com/en/content/learn/modules/data-cloud-one-quick-look", "synopsis": "Expand Data 360's reach across orgs with Data Cloud One.", "type": "Module", "level": "Intermediate", "minutes": 10 }
+      ]
+    },
+    "tableau-analytics": { "query": "Tableau CRM Analytics dashboards", "items": [] },
+    "feedback-management": { "query": "Salesforce Feedback Management surveys", "items": [] },
+    "agentforce": {
+      "query": "Agentforce agents low code",
+      "items": [
+        { "title": "Setup with Agentforce for Admins", "url": "https://trailhead.salesforce.com/en/content/learn/modules/setup-with-agentforce-for-admins", "synopsis": "Use Setup with Agentforce to manage, customize, and troubleshoot your Salesforce org.", "type": "Module", "level": "Intermediate", "minutes": 100 },
+        { "title": "Agentforce: Agent Planning", "url": "https://trailhead.salesforce.com/en/content/learn/modules/agentforce-agent-planning", "synopsis": "Learn best practices for planning an effective, trusted AI agent.", "type": "Module", "level": "Intermediate", "minutes": 55 },
+        { "title": "Agentforce Help Agent", "url": "https://trailhead.salesforce.com/en/content/learn/modules/agentforce-help-agent", "synopsis": "Set up an AI-powered Help Agent for your website, help portal, or voice channel.", "type": "Module", "level": "Intermediate", "minutes": 30 }
+      ]
+    },
+    "mulesoft": {
+      "query": "MuleSoft Anypoint integration",
+      "items": [
+        { "title": "Anypoint Platform Basics", "url": "https://trailhead.salesforce.com/en/content/learn/modules/anypoint-platform-basics", "synopsis": "Discover the benefits of Anypoint Platform and learn how to use its key tools.", "type": "Module", "level": "Intermediate", "minutes": 20 },
+        { "title": "MuleSoft Composer Basics", "url": "https://trailhead.salesforce.com/en/content/learn/modules/mulesoft-composer-basics", "synopsis": "Learn how admins and business users can integrate apps and data with MuleSoft Composer.", "type": "Module", "level": "Intermediate", "minutes": 15 }
+      ]
+    },
+    "experience-cloud": {
+      "query": "Experience Cloud sites communities",
+      "items": [
+        { "title": "Experience Cloud Site Strategy", "url": "https://trailhead.salesforce.com/en/content/learn/modules/experience-cloud-site-strategy", "synopsis": "Define your goals and create a structured plan for building your Experience Cloud site.", "type": "Module", "level": "Foundational", "minutes": 40 },
+        { "title": "Grantmaking Site Template for Experience Cloud", "url": "https://trailhead.salesforce.com/en/content/learn/modules/grantmaking-site-template-for-experience-cloud", "synopsis": "Use the Grantmaking site template to streamline work with applicants and grantees — relevant for nonprofit communities.", "type": "Module", "level": "Foundational", "minutes": 15 }
+      ]
+    },
+    "revenue-cloud": { "query": "Revenue Cloud CPQ quoting", "items": [] },
+    "einstein-search": { "query": "Einstein Search Salesforce", "items": [] },
+    "service-cloud-voice": {
+      "query": "Service Cloud Voice telephony",
+      "items": [
+        { "title": "Partner Contact Center", "url": "https://trailhead.salesforce.com/en/content/learn/modules/service-cloud-voice", "synopsis": "Add phone support to deliver top-notch service backed by a third-party telephony provider (e.g. Amazon Connect / Five9).", "type": "Module", "level": "Intermediate", "minutes": 10 },
+        { "title": "Introduction to Agentforce Contact Center", "url": "https://trailhead.salesforce.com/en/content/learn/modules/agentforce-contact-center", "synopsis": "Explore the agentic contact center with Agentforce.", "type": "Module", "level": "Intermediate", "minutes": 25 }
+      ]
+    },
+    "workforce-engagement": { "query": "Service Cloud Workforce Engagement", "items": [] },
+    "customer-success": { "query": "Service Cloud customer success", "items": [] },
+    "devops-center": { "query": "Salesforce DevOps Center", "items": [] },
+    "incentive-compensation": {
+      "query": "Incentive Compensation Management Spiff",
+      "items": [
+        { "title": "Salesforce Spiff Basics", "url": "https://trailhead.salesforce.com/en/content/learn/modules/salesforce-spiff-basics", "synopsis": "Power commission programs and improve cross-department incentive performance with Spiff.", "type": "Module", "level": "Foundational", "minutes": 15 },
+        { "title": "Commission Management with Salesforce Spiff", "url": "https://trailhead.salesforce.com/en/content/learn/modules/commission-management-with-salesforce-spiff", "synopsis": "Increase your commission program's efficiency, accuracy, and visibility with Spiff.", "type": "Module", "level": "Foundational", "minutes": 10 },
+        { "title": "Salesforce Spiff Plans", "url": "https://trailhead.salesforce.com/en/content/learn/modules/salesforce-spiff-plans", "synopsis": "Set up, manage, and organize commission plans and users in Salesforce Spiff.", "type": "Module", "level": "Intermediate", "minutes": 25 }
+      ]
+    },
+    "knowledge": {
+      "query": "Salesforce Knowledge articles Service Cloud",
+      "items": [
+        { "title": "Lightning Knowledge Migration", "url": "https://trailhead.salesforce.com/en/content/learn/modules/lightning-knowledge-migration", "synopsis": "Unlock the full power of Knowledge by migrating to Lightning Knowledge.", "type": "Module", "level": "Intermediate", "minutes": 70 },
+        { "title": "Knowledge Base Improvement Using Feedback", "url": "https://trailhead.salesforce.com/en/content/learn/modules/knowledge-base-improvement-using-feedback", "synopsis": "Set up knowledge feedback to gather insights and improve your knowledge base.", "type": "Module", "level": "Foundational", "minutes": 40 }
+      ]
+    },
+    "privacy-center": { "query": "Salesforce Privacy Center consent", "items": [] }
+  }
+}
