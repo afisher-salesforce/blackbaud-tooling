@@ -1,12 +1,15 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Package, Users, Cloud, FileText, UserCheck, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Package, Users, Cloud, FileText, UserCheck, HelpCircle, BadgeCheck } from 'lucide-react';
 import AlignmentChip from '../components/AlignmentChip';
+import EntitlementChip from '../components/EntitlementChip';
+import RetireCallout from '../components/RetireCallout';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 import DiscussionNotes from '../components/DiscussionNotes';
 import TrailheadRail from '../components/TrailheadRail';
-import { getCapability } from '../content/capabilities';
+import { getCapability, capabilityEntitlement } from '../content/capabilities';
 import { alignmentMeta } from '../content/alignment';
+import { ENTITLEMENT_DISCLAIMER } from '../content/entitlements';
 
 function Field({ icon: Icon, label, children }) {
   return (
@@ -37,6 +40,7 @@ export default function CapabilityDetail() {
   }
 
   const meta = alignmentMeta(cap.alignment);
+  const ent = capabilityEntitlement(cap);
 
   return (
     <div className="max-w-4xl mx-auto space-y-5">
@@ -57,7 +61,10 @@ export default function CapabilityDetail() {
               </div>
               <h1 className="text-xl font-bold text-th-primary">{cap.subCapability}</h1>
             </div>
-            <AlignmentChip value={cap.alignment} />
+            <div className="flex flex-col items-end gap-1.5">
+              <AlignmentChip value={cap.alignment} />
+              <EntitlementChip status={ent.status} expiry={ent.info?.expiry} />
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4 mt-5">
@@ -67,9 +74,24 @@ export default function CapabilityDetail() {
               {cap.sfProducts && cap.sfProducts.length ? cap.sfProducts.join(', ') : '— (no direct Salesforce product)'}
             </Field>
             <Field icon={HelpCircle} label="Alignment meaning">{meta.description}</Field>
+            {ent.info?.products?.length ? (
+              <Field icon={BadgeCheck} label="Licensed via">
+                {ent.info.products.join(', ')}
+                {ent.info.expiry ? <span className="text-amber-500"> · term ends {ent.info.expiry}</span> : null}
+              </Field>
+            ) : null}
           </div>
         </div>
       </div>
+
+      {/* "You already own this" — shown when owned AND overlaps a retireable tool */}
+      {['owned', 'owned-expiring'].includes(ent.status) && cap.retires?.length ? (
+        <RetireCallout products={ent.info?.products || []} retires={cap.retires} expiring={ent.info?.expiry} />
+      ) : null}
+
+      {ent.status !== 'na' && (
+        <p className="text-[11px] text-th-faint italic px-1">{ENTITLEMENT_DISCLAIMER}</p>
+      )}
 
       {/* Draft note + SE review */}
       <div className="grid md:grid-cols-2 gap-4">

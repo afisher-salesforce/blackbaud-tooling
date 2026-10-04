@@ -17,7 +17,13 @@ to leave with their view captured. Run time ~20–25 min.
 - Point at the alignment distribution counts: Native + Integrates = the consolidation story; Gap counts shown
   honestly on purpose.
 
-## 1 · The heatmap (3 min) — Overview
+## 1 · "Start inward first" — the already-licensed story (3 min) — Overview
+- Point at the green **"Start inward first"** banner and the two stats: **N already licensed**, **N owned · retire a tool**.
+- The core message (Chris Lindner's words): teams are running RFPs — forecasting, CLM — for capabilities Blackbaud
+  **already pays for**. "$300K saved right out of the box."
+- Grounded in Blackbaud's actual Salesforce entitlement export (Charleston org), aligned to the August evidence matrix.
+
+## 2 · The heatmap (2 min) — Overview
 - "Each dot is a capability, colored by draft alignment. Green/blue clusters = where Salesforce already plays;
   slate = genuine gaps."
 - Note the A2R vs I2R split visually. Click a green dot to jump straight into a capability — show it's interactive.
@@ -31,13 +37,20 @@ to leave with their view captured. Run time ~20–25 min.
 - Type a note in **Discussion notes** live (e.g. "Russ: confirm whether goal is replace or surface in-platform").
   Reload the page — it persists. That's the capture mechanism.
 
-## 3 · The strong consolidation story (4 min) — Capability Map `/map`
-- Filter **Alignment = Native**. "These are capabilities you can run on the Salesforce investment you already hold."
-- Open **Forecasting & Pipeline** (Clari): Native; note Clari's renewal is the near-term forcing function. Scroll to
-  the **Trailhead rail** — "you already own this, and here's the enablement path." (Salesforce Forecasting, Pipeline
-  Inspection.)
-- Open **Conversation Intelligence** (Gong): deliberately **Partial**, not Native — "ECI covers the jobs, but
-  unwinding Gong is a sales-process conversation, not a line-item swap. We're flagging that honestly."
+## 3 · The money filter + the Revenue Cloud centerpiece (6 min) — Capability Map `/map`
+- Filter **Entitlement = "Owned · retire a tool"**. Six rows surface — the sharpest rationalization candidates:
+  Clari (forecasting), Gong (conversation intelligence), CoPilot Studio (Agentforce), SteelBrick CPQ + PSQuote
+  (Revenue Cloud), Five9 (Service Cloud Voice), Qlik (renewal analytics, **expiring ~Jan 2027**).
+- Open **Forecasting & Pipeline**: the green "You already license this" callout — Collaborative Forecasting +
+  Territory Management are in Sales Cloud UE, Agentforce for Sales adds conversational access. The RFP is for
+  something owned.
+- Open **Configure-Price-Quote & Revenue Lifecycle** — the **centerpiece**. Blackbaud is paying for BOTH legacy
+  CPQ Plus AND Revenue Cloud Advanced (the upgrade) simultaneously; the migration stalled. Walk the three discussion
+  prompts: what blocked the migration, who owns quote-to-cash end to end (sales for new logos, CS for renewals), and
+  deploying CLM + Agentforce Revenue Management together. **This sets up the Professional Services engagement** —
+  frame it as a sales-and-renewal process change, not a tool swap.
+- Open **Conversation Intelligence** (Gong): Blackbaud already owns Customer Experience Intelligence — so the message
+  is "you own the replacement capability; whether to retire Gong is a sales-process conversation, not a licensing one."
 
 ## 4 · The honest gaps (2 min) — Capability Map
 - Filter **Alignment = Gap**. "We're not claiming these — Adobe Creative Cloud, Getty, G2, Jira, Camtasia. Naming

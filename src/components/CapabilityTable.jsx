@@ -2,7 +2,9 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, ChevronRight } from 'lucide-react';
 import AlignmentChip from './AlignmentChip';
+import EntitlementChip from './EntitlementChip';
 import { ALIGNMENT, ALIGNMENT_ORDER } from '../content/alignment';
+import { capabilityEntitlement } from '../content/capabilities';
 
 /**
  * CapabilityTable — the filterable inventory. One row per capability (which may
@@ -25,6 +27,7 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
   const [stream, setStream] = useState('all');
   const [alignment, setAlignment] = useState('all');
   const [domain, setDomain] = useState('all');
+  const [licensed, setLicensed] = useState('all');
   const [q, setQ] = useState('');
 
   const filtered = useMemo(() => {
@@ -33,6 +36,13 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
       .filter((c) => (lockStream ? true : stream === 'all' || c.valueStream === stream))
       .filter((c) => alignment === 'all' || c.alignment === alignment)
       .filter((c) => domain === 'all' || c.domain === domain)
+      .filter((c) => {
+        if (licensed === 'all') return true;
+        const s = capabilityEntitlement(c).status;
+        if (licensed === 'licensed') return ['owned', 'owned-expiring', 'separate-agreement'].includes(s);
+        if (licensed === 'retire') return ['owned', 'owned-expiring'].includes(s) && c.retires?.length;
+        return true;
+      })
       .filter((c) => {
         if (!needle) return true;
         const hay = [c.subCapability, c.domain, ...c.tools, ...(c.sfProducts || [])].join(' ').toLowerCase();
@@ -43,7 +53,7 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
         if (a.domain !== b.domain) return a.domain.localeCompare(b.domain);
         return ALIGNMENT_ORDER.indexOf(a.alignment) - ALIGNMENT_ORDER.indexOf(b.alignment);
       });
-  }, [rows, stream, alignment, domain, q, lockStream]);
+  }, [rows, stream, alignment, domain, licensed, q, lockStream]);
 
   return (
     <div className="section-card">
@@ -73,6 +83,11 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
               </option>
             ))}
           </select>
+          <select value={licensed} onChange={(e) => setLicensed(e.target.value)} className="rounded-md border px-2.5 py-1.5 text-xs">
+            <option value="all">All entitlements</option>
+            <option value="licensed">Already licensed</option>
+            <option value="retire">Owned · retire a tool</option>
+          </select>
         </div>
         <div className="relative">
           <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-th-faint" />
@@ -96,6 +111,7 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
               {!lockStream && <th>Stream</th>}
               <th>Primary users</th>
               <th>Alignment</th>
+              <th>Entitlement</th>
               <th>Salesforce</th>
               <th className="w-8" />
             </tr>
@@ -119,6 +135,16 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
                 <td>
                   <AlignmentChip value={c.alignment} size="xs" />
                 </td>
+                <td>
+                  {(() => {
+                    const e = capabilityEntitlement(c);
+                    return e.status === 'na' ? (
+                      <span className="text-[11px] text-th-faint">—</span>
+                    ) : (
+                      <EntitlementChip status={e.status} size="xs" expiry={e.info?.expiry} />
+                    );
+                  })()}
+                </td>
                 <td className="text-[11px] text-th-muted max-w-[200px]">
                   {c.sfProducts && c.sfProducts.length ? c.sfProducts.slice(0, 2).join(', ') : '—'}
                   {c.sfProducts && c.sfProducts.length > 2 && (
@@ -132,7 +158,7 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={lockStream ? 6 : 7} className="text-center py-10 text-sm text-th-muted">
+                <td colSpan={lockStream ? 7 : 8} className="text-center py-10 text-sm text-th-muted">
                   No capabilities match these filters.
                 </td>
               </tr>

@@ -5,8 +5,10 @@ import DisclaimerBanner from '../components/DisclaimerBanner';
 import HeatmapGrid from '../components/HeatmapGrid';
 import RoadmapTile from '../components/RoadmapTile';
 import AlignmentChip from '../components/AlignmentChip';
-import { CAPABILITIES, TOOL_COUNT, DOMAINS, alignmentCounts, capabilitiesByStream } from '../content/capabilities';
+import { CAPABILITIES, TOOL_COUNT, DOMAINS, alignmentCounts, capabilitiesByStream, licensedCount, retireCandidates } from '../content/capabilities';
 import { ALIGNMENT_ORDER, alignmentMeta } from '../content/alignment';
+import { ENTITLEMENT_DISCLAIMER } from '../content/entitlements';
+import { BadgeCheck } from 'lucide-react';
 
 function Stat({ value, label }) {
   return (
@@ -21,6 +23,8 @@ export default function Overview() {
   const counts = alignmentCounts();
   const a2r = capabilitiesByStream('A2R').length;
   const i2r = capabilitiesByStream('I2R').length;
+  const licensed = licensedCount();
+  const retireRows = retireCandidates();
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -55,12 +59,37 @@ export default function Overview() {
 
       <DisclaimerBanner />
 
+      {/* "Start inward first" — the already-licensed story */}
+      <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-5">
+        <div className="flex items-start gap-3">
+          <div className="rounded-lg bg-emerald-500/15 p-2 shrink-0">
+            <BadgeCheck size={20} className="text-emerald-600 dark:text-emerald-400" />
+          </div>
+          <div>
+            <h2 className="text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-1">
+              Start inward first — much of this is already licensed
+            </h2>
+            <p className="text-sm text-th-secondary leading-relaxed max-w-3xl">
+              Of the capabilities Salesforce aligns to, <strong>{licensed}</strong> are already active Blackbaud
+              entitlements — and <strong>{retireRows.length}</strong> of those directly overlap a third-party tool
+              that becomes a candidate to retire by activating what’s owned. Several active RFPs (forecasting, CLM)
+              are for capabilities Blackbaud already pays for. Filter the map to{' '}
+              <Link to="/map" className="font-medium underline" style={{ color: 'var(--bb-accent)' }}>
+                “Owned · retire a tool”
+              </Link>{' '}
+              to see them.
+            </p>
+            <p className="text-[11px] text-th-faint mt-2 italic">{ENTITLEMENT_DISCLAIMER}</p>
+          </div>
+        </div>
+      </div>
+
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Stat value={TOOL_COUNT} label="Tools in scope" />
         <Stat value={CAPABILITIES.length} label="Capabilities mapped" />
-        <Stat value={DOMAINS.length} label="Capability domains" />
-        <Stat value={`${a2r}·${i2r}`} label="A2R · I2R split" />
+        <Stat value={licensed} label="Already licensed" />
+        <Stat value={retireRows.length} label="Owned · retire a tool" />
       </div>
 
       {/* Alignment distribution */}

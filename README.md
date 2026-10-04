@@ -13,6 +13,13 @@ hosted on Heroku in a Private Space.
 - **Capability map** — every capability against a **6-way alignment** placement: Native · Integrates · Data 360 ·
   Partial · Gap · Discuss. Deliberately NOT binary — the point for Enterprise Architecture is the shades of gray
   (e.g. LinkedIn Sales Navigator *integrates* in-platform and via Data 360; it is neither "covered" nor "a gap").
+- **Entitlement status** — every capability shows whether Blackbaud **already licenses** the Salesforce capability
+  (Licensed / Licensed·expiring / Separate agreement / Not licensed), grounded in the Salesforce asset-line-item
+  export (Charleston org) and aligned to the August 2026 evidence matrix. Where a capability is owned AND overlaps a
+  third-party tool, a "you already own this — candidate to retire [tool]" callout makes the rationalization payoff
+  explicit (Clari, Gong, CoPilot Studio, SteelBrick CPQ, Five9, Qlik). Revenue Cloud is a dedicated thread: CPQ Plus
+  and Revenue Cloud Advanced are both licensed today, the migration stalled, and it is framed as a sales-and-renewal
+  process change (the Professional Services engagement), not a tool swap.
 - **Honest framing** — the alignment column is labeled a **preliminary Salesforce point of view for discussion**,
   starting from Christa's quickly-assembled (partly Gemini-assisted) draft and explicitly not validated with
   Blackbaud. Every capability shows Christa's draft note alongside a Salesforce SE review.

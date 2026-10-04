@@ -37,6 +37,7 @@ export const CAPABILITIES = [
     primaryUsers: 'Sales, Service & GTM (enterprise); JustGiving Sales & Marketing',
     alignment: 'native',
     sfProducts: ['Sales Cloud', 'Service Cloud'],
+    ownedKey: 'core-crm',
     draftNote:
       'Christa: Covered — core Sales Cloud & Service Cloud is the enterprise system of record; JustGiving CRM also fully covered.',
     seReview:
@@ -57,11 +58,13 @@ export const CAPABILITIES = [
     tools: ['Clari'],
     primaryUsers: 'Sales / Revenue Operations',
     alignment: 'native',
-    sfProducts: ['Revenue Intelligence', 'Collaborative Forecasting', 'Pipeline Inspection', 'Einstein Deal Insights'],
+    sfProducts: ['Collaborative Forecasting', 'Pipeline Inspection', 'Territory Management', 'Agentforce for Sales'],
+    ownedKey: 'core-crm',
+    retires: ['Clari'],
     draftNote:
       'Christa: Covered — Revenue Intelligence, Collaborative Forecasting, Pipeline Inspection, Einstein deal health.',
     seReview:
-      'Agree Native. We have already built a Blackbaud-specific Agentforce for Sales forecasting demo against this exact replacement question — Clari’s contract is the near-term pressure point. The nuance to raise live: forward-looking conversion analytics is the one Clari capability to validate parity on, not just current-quarter rollup.',
+      'This is the live one: Blackbaud is running a forecasting RFP (Clari / Gong Forecast) for a capability it ALREADY owns — Collaborative Forecasting + Territory Management are included in Sales & Service Cloud Unlimited, and Agentforce for Sales (owned) adds conversational access to the forecast. Chris Lindner’s reaction captured it: "$300K saved right out of the box." This is an IMPLEMENTATION play, not a procurement play. The one parity item to validate live: forward-looking conversion analytics (not just current-quarter rollup).',
     trailheadSlug: 'forecasting',
     discussionPrompts: [
       'What does Clari give RevOps today that collaborative forecasting + Pipeline Inspection would need to match before a switch?',
@@ -76,11 +79,13 @@ export const CAPABILITIES = [
     tools: ['Gong'],
     primaryUsers: 'Sales, Marketing & Customer Success',
     alignment: 'partial',
-    sfProducts: ['Einstein Conversation Insights (ECI)', 'Sales Engagement'],
+    sfProducts: ['Customer Experience Intelligence (CXI)', 'Einstein Conversation Insights'],
+    ownedKey: 'cxi',
+    retires: ['Gong'],
     draftNote:
       'Christa: Covered — Einstein Conversation Insights (call/meeting recording analysis, transcription, competitor mentions, coaching).',
     seReview:
-      'Downgraded to Partial on purpose. ECI covers the recording/transcription/coaching jobs, but the prep call flagged that unwinding Gong is NOT a clean swap — it is woven into the sales process and used across Sales, Marketing and CS. Replacing it without full buy-in reads as "investing in integrations because you don’t like Salesforce." Treat as a process conversation, sequenced after forecasting, not a line-item swap.',
+      'Important entitlement note: Blackbaud ALREADY owns Customer Experience Intelligence (Unlimited) — the conversation-intelligence capability that overlaps Gong is a paid, active entitlement, not a net-new buy. Still Partial on the business side: the prep call flagged that unwinding Gong is NOT a clean swap — it is woven into the sales process across Sales, Marketing and CS. So the honest message is "you already own the replacement capability; whether/when to retire Gong is a sales-process conversation, not a licensing one."',
     trailheadSlug: 'conversation-insights',
     discussionPrompts: [
       'Which teams depend on Gong today, and for what exactly — coaching, deal intelligence, or forecasting signal?',
@@ -165,10 +170,11 @@ export const CAPABILITIES = [
     tools: ['Qualified'],
     primaryUsers: 'Marketing',
     alignment: 'native',
-    sfProducts: ['Agentforce', 'Einstein Bots', 'Messaging for Web'],
+    sfProducts: ['Qualified (now part of Salesforce)', 'Agentforce', 'Messaging for Web'],
+    ownedKey: 'qualified',
     draftNote: 'Christa: Covered — Agentforce chat / conversational bots.',
     seReview:
-      'Native and strategically on-message: Qualified’s conversational-pipeline play is exactly where Agentforce (web messaging + an SDR-style agent) is strongest. Good candidate for a tangible Agentforce proof later.',
+      'Entitlement update: Qualified is now part of Salesforce AND Blackbaud already owns it (Qualified Agentic Marketing Platform + SFDC connector, 260 seats) — the website chat on Blackbaud.com IS Qualified today. So this isn’t "could adopt" — it’s already in use. The opportunity is to link Qualified into the broader marketing + SDR architecture now that it is Salesforce-native, rather than treating it as a standalone point tool.',
     trailheadSlug: 'agentforce-service',
     discussionPrompts: ['Would an Agentforce web-chat proof against a Blackbaud use case help make this concrete?'],
   },
@@ -332,11 +338,12 @@ export const CAPABILITIES = [
     tools: ['Adobe Analytics', 'Mouseflow', 'PointerPro', 'Windsor.AI'],
     primaryUsers: 'Marketing',
     alignment: 'partial',
-    sfProducts: ['Data 360', 'Tableau', 'CRM Analytics'],
+    sfProducts: ['Data 360', 'Tableau', 'Tableau Next'],
+    ownedKey: 'tableau',
     draftNote:
       'Christa: Inconclusive — Data Cloud + Tableau analyze web data, but qualitative heatmaps/DOM session replay (Mouseflow) are outside core CRM.',
     seReview:
-      'Partial. Tableau + Data 360 are strong for the analytics/measurement layer; session-replay/heatmap (Mouseflow) is a genuine gap within this cluster. Split the discussion: analytics = strong, replay = keep.',
+      'Partial, with an entitlement flag: Tableau is OWNED but EXPIRES ~Jan 2027 (Q4 FY2027) — a near-term decision point. Tableau Next (embedded, now part of the entitlement) covers the Salesforce-resident analytics natively and works best when data is in Salesforce or zero-copied into Data 360; standalone Tableau to replace Qlik is a separate renewal conversation. Session-replay/heatmap (Mouseflow) is a genuine gap within this cluster — analytics = strong, replay = keep.',
     trailheadSlug: 'tableau-analytics',
     discussionPrompts: ['Is the goal unified measurement (Tableau/Data 360) or the behavioral-replay tooling specifically?'],
   },
@@ -506,10 +513,12 @@ export const CAPABILITIES = [
     primaryUsers: 'ETG / IT (Microsoft EA)',
     alignment: 'native',
     sfProducts: ['Agentforce', 'Agent Builder'],
+    ownedKey: 'agentforce',
+    retires: ['CoPilot Studio'],
     draftNote:
       'Christa: Covered — Agentforce (Einstein Copilot Studio / Bots): low-code autonomous AI agents + conversational workflows.',
     seReview:
-      'Native, and strategically central. This is where the "Claudeforce"/Agentforce conversation lands — CoPilot Studio rides the Microsoft EA; Agentforce is the Salesforce-native equivalent that grounds in the CRM data and honors the permission model. This is also the hook for the future Headless 360 / Aiforce roadmap tile on this site.',
+      'Native AND owned: Agentforce for Sales (750) and for Service (550) are active entitlements. CoPilot Studio rides the Microsoft EA; Agentforce is the owned, Salesforce-native equivalent that grounds in the CRM data and honors the permission model. The Agentforce Coworker pilot is already in the org and can be enabled by permission (Teams embedding targeted ~Oct). This is also the hook for the future Headless 360 / Aiforce roadmap tile on this site.',
     trailheadSlug: 'agentforce',
     discussionPrompts: [
       'Where are AI agents being built today — CoPilot Studio, elsewhere, or not yet in GTM?',
@@ -686,20 +695,27 @@ export const CAPABILITIES = [
 
   // ─────────────────────────── CPQ / Quoting · PSA ───────────────────────────
   {
-    id: 'ps-quoting-cpq',
+    id: 'revenue-cloud-cpq',
     valueStream: 'A2R',
     domain: 'CPQ / Quoting',
-    subCapability: 'PS Quoting / CPQ',
+    subCapability: 'Configure-Price-Quote & Revenue Lifecycle',
     tools: ['PSQuote'],
-    primaryUsers: 'Professional Services / Sales',
+    primaryUsers: 'Sales (new logos) · Customer Success (renewals) · Professional Services',
     alignment: 'native',
-    sfProducts: ['Revenue Cloud', 'Salesforce CPQ'],
+    sfProducts: ['Revenue Cloud Advanced', 'Agentforce Revenue Management (ARM)', 'CPQ Plus (legacy)'],
+    ownedKey: 'revenue-cloud',
+    retires: ['SteelBrick CPQ', 'PSQuote'],
+    isFocus: true,
     draftNote:
       'Christa: Covered — Salesforce CPQ / Revenue Cloud: PS rate cards, SOW quoting, approval matrices, contracts.',
     seReview:
-      'Native for the quoting/CPQ job. Note PSQuote is tightly linked to Certinia PSA (below) — the services-quoting-to-delivery flow should be discussed together.',
+      'The sharpest entitlement finding on the whole map: Blackbaud is paying for BOTH the legacy CPQ Plus (SteelBrick) AND its replacement, Revenue Cloud Advanced (the "CPQ Upgrade"), simultaneously — the migration stalled, so the old and new sit side by side on the entitlement. Restarting that migration is a Professional Services engagement, not a licensing question. Crucially it is NOT a standalone CPQ swap: configure-price-quote is inseparable from opportunity management (new-logo deals the sales team runs) and from renewals (which Customer Success runs) — so a Revenue Cloud deployment is really a sales-and-renewal PROCESS change. Pairing it with CLM and Agentforce Revenue Management (ARM) is the right shape: ARM unlocks product-catalog, pricing and bundling, all API-enabled unlike CPQ. (OSF is the likely implementation partner.)',
     trailheadSlug: 'revenue-cloud',
-    discussionPrompts: ['Does PS quoting need to stay joined to Certinia delivery, or can quoting move to Revenue Cloud independently?'],
+    discussionPrompts: [
+      'The migration from CPQ Plus to Revenue Cloud Advanced stalled — what blocked it, and what would it take to restart (a Professional Services engagement scoped around it)?',
+      'Who owns the quote-to-cash process end to end today — sales for new logos, CS for renewals? A Revenue Cloud deployment changes both, so both need to be at the table.',
+      'Should CLM and Agentforce Revenue Management (ARM) be deployed together with the Revenue Cloud migration, rather than as separate projects?',
+    ],
   },
   {
     id: 'psa-services-erp',
@@ -747,11 +763,12 @@ export const CAPABILITIES = [
     tools: ['Five9', 'Amazon Connect', 'Calabrio / Controlio', 'Krisp'],
     primaryUsers: 'Customer Support — Collaboration Services',
     alignment: 'integrates',
-    sfProducts: ['Service Cloud Voice', 'Omni-Channel', 'Einstein Conversation Insights'],
+    sfProducts: ['Service Cloud Voice (Partner Contact Center + Amazon Connect)', 'Omni-Channel'],
+    ownedKey: 'service-voice',
     draftNote:
       'Christa: Covered — Service Cloud Voice (Amazon Connect / partner telephony), Omni-Channel supervisor routing, Einstein Conversation Insights.',
     seReview:
-      'Integrates is the precise placement, not "covered." Service Cloud Voice is designed to bring Amazon Connect (and partner telephony like Five9) INTO the agent console — you keep the carrier/telephony and get it unified in Service Cloud. The prep call flagged uncertainty on whether Amazon Connect is direct or via a voice partner; that detail matters here. Noise cancellation (Krisp) is out of scope for Salesforce.',
+      'Entitlement note: Blackbaud already owns Partner Contact Center with Amazon Connect (Unlimited, 420) — so Service Cloud Voice is a paid entitlement, not a net-new buy. Integrates is still the precise placement: it brings Amazon Connect (and partner telephony) INTO the console — you keep the carrier and unify it in Service Cloud. Deliberately NOT marking Five9 as a retire candidate: the prep call left open whether Amazon Connect is a direct AWS relationship or runs through a voice partner, and Five9 may BE the carrier rather than a tool to replace. That carrier question is the thing to resolve before any consolidation claim — hence a discussion, not a retire. Noise cancellation (Krisp) is out of scope for Salesforce.',
     trailheadSlug: 'service-cloud-voice',
     discussionPrompts: [
       'Is Amazon Connect a direct AWS relationship or through a voice partner? That changes the Service Cloud Voice integration path.',
@@ -816,11 +833,13 @@ export const CAPABILITIES = [
     tools: ['Qlik'],
     primaryUsers: 'Data Insights / Renewals',
     alignment: 'native',
-    sfProducts: ['CRM Analytics', 'Tableau'],
+    sfProducts: ['Tableau Next', 'Tableau', 'Data 360'],
+    ownedKey: 'tableau',
+    retires: ['Qlik'],
     draftNote:
       'Christa: Covered — CRM Analytics (Tableau CRM) + Tableau: renewal cohort analytics, retention forecasting, ARR pipeline.',
     seReview:
-      'Native for renewal reporting on CRM data. Nuance: Qlik is often an enterprise BI standard spanning non-CRM data — confirm whether it is renewal-specific (native fits) or an enterprise BI platform (broader decision, Tableau as the strategic answer).',
+      'Native for renewal reporting on CRM data. Entitlement nuance: CRM Analytics is NOT separately licensed (no Plus SKU found), but Tableau Next now covers this natively within the Data 360 context — and Tableau (owned) expires ~Jan 2027. Qlik is often an enterprise BI standard spanning non-CRM data — confirm whether it is renewal-specific (Tableau Next fits) or the enterprise BI platform (a broader standalone-Tableau-vs-Qlik decision).',
     trailheadSlug: 'tableau-analytics',
     discussionPrompts: ['Is Qlik the renewals-reporting tool specifically, or Blackbaud’s enterprise BI standard?'],
   },
@@ -1044,4 +1063,34 @@ export function alignmentCounts(rows = CAPABILITIES) {
     acc[c.alignment] = (acc[c.alignment] || 0) + 1;
     return acc;
   }, {});
+}
+
+// ─── Entitlement helpers ──────────────────────────────────────────────────────
+// A capability's entitlement status is derived from the owned product it maps to
+// (ownedKey → OWNED_PRODUCTS[...].status). Capabilities with no ownedKey are
+// treated as not-licensed when Salesforce aligns (native/integrates/data360/
+// partial) and n/a when it is a genuine gap/discuss.
+import { OWNED_PRODUCTS } from './entitlements.js';
+
+export function capabilityEntitlement(cap) {
+  if (cap.ownedKey && OWNED_PRODUCTS[cap.ownedKey]) {
+    return { status: OWNED_PRODUCTS[cap.ownedKey].status, info: OWNED_PRODUCTS[cap.ownedKey] };
+  }
+  if (cap.alignment === 'gap' || cap.alignment === 'discuss') return { status: 'na', info: null };
+  return { status: 'not-licensed', info: null };
+}
+
+// Count capabilities whose capability is an active Salesforce entitlement
+// (owned / owned-expiring / separate-agreement) — the "already licensed" story.
+export function licensedCount(rows = CAPABILITIES) {
+  return rows.filter((c) => ['owned', 'owned-expiring', 'separate-agreement'].includes(capabilityEntitlement(c).status)).length;
+}
+
+// Capabilities that are BOTH owned AND overlap a third-party tool that could be
+// retired — the sharpest "you already pay for this" rows.
+export function retireCandidates(rows = CAPABILITIES) {
+  return rows.filter((c) => {
+    const ent = capabilityEntitlement(c).status;
+    return ['owned', 'owned-expiring'].includes(ent) && Array.isArray(c.retires) && c.retires.length > 0;
+  });
 }
