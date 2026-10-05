@@ -16,32 +16,50 @@
  */
 
 import { execFileSync } from 'node:child_process';
+import { writeFileSync, mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { CAPABILITIES, capabilityEntitlement } from '../src/content/capabilities.js';
 import { OWNED_PRODUCTS, ENTITLEMENT_AS_OF } from '../src/content/entitlements.js';
 
 const API = 'v64.0';
 const ALIGN_LABEL = { native: 'Native', integrates: 'Integrates', data360: 'Data 360', partial: 'Partial', gap: 'Gap', discuss: 'Discuss' };
 
+// Resolve just the target-org flag; the CLI handles auth itself.
 function orgAuth(orgArg) {
   const target = orgArg || process.env.SF_TARGET_ORG;
-  const args = ['org', 'display', '--json'];
-  if (target) args.push('--target-org', target);
-  const out = execFileSync('sf', args, { encoding: 'utf8' });
-  const res = JSON.parse(out).result;
-  if (!res?.accessToken || !res?.instanceUrl) throw new Error('Could not get org auth from sf org display');
-  return { token: res.accessToken, instance: res.instanceUrl.replace(/\/+$/, '') };
+  if (!target) throw new Error('Pass the org alias/username as the first arg or set SF_TARGET_ORG.');
+  return { target };
 }
 
+const TMP = mkdtempSync(join(tmpdir(), 'bb-seed-'));
+let callSeq = 0;
+
+/**
+ * POST a JSON body to a Salesforce REST path through `sf api request rest`, which
+ * uses the CLI's own authenticated connection (no hand-built Authorization
+ * header — that was returning INVALID_AUTH_HEADER). The body goes via a temp
+ * file (--body @file) to avoid shell-escaping large JSON.
+ */
 async function post(auth, path, body) {
-  const res = await fetch(`${auth.instance}${path}`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${auth.token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  const text = await res.text();
+  const bodyFile = join(TMP, `req-${++callSeq}.json`);
+  writeFileSync(bodyFile, JSON.stringify(body));
+  let out;
+  try {
+    out = execFileSync(
+      'sf',
+      ['api', 'request', 'rest', path, '--method', 'POST', '--body', `@${bodyFile}`, '--target-org', auth.target],
+      { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024 }
+    );
+  } catch (e) {
+    // sf exits non-zero on HTTP 4xx but still prints the JSON error body to stdout.
+    out = e.stdout || e.message;
+  }
   let data;
-  try { data = text ? JSON.parse(text) : null; } catch { data = text; }
-  if (!res.ok) throw new Error(`${path} failed (${res.status}): ${typeof data === 'string' ? data : JSON.stringify(data)}`);
+  try { data = JSON.parse(out); } catch { throw new Error(`${path}: non-JSON response: ${String(out).slice(0, 300)}`); }
+  if (Array.isArray(data) && data[0]?.errorCode) {
+    throw new Error(`${path} failed: ${data[0].errorCode} ${data[0].message || ''}`);
+  }
   return data;
 }
 
@@ -70,9 +88,15 @@ function slug(s) {
   return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 100);
 }
 
+// Composite referenceIds allow ONLY letters, numbers, and underscores (no
+// hyphens). Build them from the slug with hyphens collapsed to underscores.
+function mkRef(prefix, s) {
+  return `${prefix}_${slug(s).replace(/-/g, '_')}`;
+}
+
 async function main() {
   const auth = orgAuth(process.argv[2]);
-  console.log(`→ org ${auth.instance}`);
+  console.log(`→ org ${auth.target}`);
 
   // 1. Entitlements
   const entReqs = Object.entries(OWNED_PRODUCTS).map(([key, info]) =>
@@ -83,7 +107,7 @@ async function main() {
       Expiry__c: info.expiry || null,
       As_Of__c: ENTITLEMENT_AS_OF,
       Source__c: 'Asset line items, Charleston org 00130000016hsaj',
-    }, `ent_${key}`)
+    }, mkRef('ent', key))
   );
   const entRes = await compositeUpsert(auth, entReqs);
   console.log(`  entitlements: ${entRes.filter((r) => r.httpStatusCode < 300).length}/${entReqs.length} upserted`);
@@ -110,7 +134,7 @@ async function main() {
     if (c.ownedKey && OWNED_PRODUCTS[c.ownedKey]) {
       body.Primary_Entitlement__r = { External_Id__c: c.ownedKey };
     }
-    return upsertSubrequest('BB_Capability__c', 'External_Id__c', c.id, body, `cap_${slug(c.id)}`);
+    return upsertSubrequest('BB_Capability__c', 'External_Id__c', c.id, body, mkRef('cap', c.id));
   });
   const capRes = await compositeUpsert(auth, capReqs);
   console.log(`  capabilities: ${capRes.filter((r) => r.httpStatusCode < 300).length}/${capReqs.length} upserted`);
@@ -129,7 +153,7 @@ async function main() {
           Capability__r: { External_Id__c: c.id },
           Overlaps_SF__c: overlaps,
           Retire_Candidate__c: Array.isArray(c.retires) && c.retires.includes(t),
-        }, `tool_${slug(ext)}`)
+        }, mkRef('tool', ext))
       );
     }
   }

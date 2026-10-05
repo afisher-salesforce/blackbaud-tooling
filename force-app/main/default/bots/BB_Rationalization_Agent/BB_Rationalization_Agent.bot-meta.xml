@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <agentDSLEnabled>true</agentDSLEnabled>
+    <agentType>EinsteinServiceAgent</agentType>
+    <botMlDomain>
+        <label>Blackbaud Rationalization Agent</label>
+        <name>BB_Rationalization_Agent</name>
+    </botMlDomain>
+    <botSource>None</botSource>
+    <botUser>serviceagentagentforce082026141345909421@example.com</botUser>
+    <description>Agentforce agent for the Blackbaud capability-alignment site. Grounds in Blackbaud capabilities, owned Salesforce entitlements, and A2R/I2R tooling to answer application-rationalization questions.</description>
+    <label>Blackbaud Rationalization Agent</label>
+    <logPrivateConversationData>false</logPrivateConversationData>
+    <richContentEnabled>true</richContentEnabled>
+    <sessionTimeout>0</sessionTimeout>
+    <type>ExternalCopilot</type>
+</Bot>

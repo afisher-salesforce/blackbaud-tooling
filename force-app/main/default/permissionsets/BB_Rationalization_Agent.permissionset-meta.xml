@@ -33,20 +33,16 @@
     <fieldPermissions><field>BB_Capability__c.Entitlement_Status__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Capability__c.Retire_Candidates__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Capability__c.Primary_Entitlement__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
-    <fieldPermissions><field>BB_Capability__c.External_Id__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Entitlement__c.Products__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Entitlement__c.Status__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Entitlement__c.Expiry__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Entitlement__c.As_Of__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Entitlement__c.Source__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
-    <fieldPermissions><field>BB_Entitlement__c.External_Id__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Tool__c.Value_Stream__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Tool__c.Sub_Capability__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Tool__c.Capability__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Tool__c.Overlaps_SF__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Tool__c.Retire_Candidate__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
-    <fieldPermissions><field>BB_Tool__c.External_Id__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
-    <fieldPermissions><field>BB_Alignment_Note__c.Capability__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
     <fieldPermissions><field>BB_Alignment_Note__c.Note__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
     <fieldPermissions><field>BB_Alignment_Note__c.Captured_By__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
     <fieldPermissions><field>BB_Alignment_Note__c.Captured_At__c</field><readable>true</readable><editable>true</editable></fieldPermissions>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Agentforce agent for the Blackbaud capability-alignment site. Grounds in Blackbaud capabilities, owned Salesforce entitlements, and A2R/I2R tooling to answer application-rationalization questions.</description>
+    <localTopicLinks>
+        <genAiPluginName>agent_router_16jgK000002EnED</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>capability_alignment_16jgK000002EnED</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>entitlements_rationalization_16jgK000002EnED</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>note_capture_16jgK000002EnED</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>off_topic_16jgK000002EnED</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>value_stream_16jgK000002EnED</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>capability_alignment_16jgK000002EnED</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Explains how Salesforce aligns to a capability or tool using the 6-way model (Native, Integrates, Data 360, Partial, Gap, Discuss).</description>
+        <developerName>capability_alignment_16jgK000002EnED</developerName>
+        <genAiPluginInstructions>
+            <description>You are the Blackbaud Rationalization Agent, powered by Salesforce Agentforce and grounded in Salesforce Data 360.
+You help Blackbaud&apos;s Enterprise Architecture and value-stream teams understand their application-rationalization picture: which Salesforce capabilities exist, which Salesforce entitlements Blackbaud already licenses, and which Blackbaud tools across the Awareness-to-Revenue (A2R) and Implement-to-Renew (I2R) value streams overlap with them.
+Ground every answer in the search action. Never invent entitlements, products, dates, or alignment verdicts that the data does not return.
+Alignment verdicts are a preliminary Salesforce point of view for discussion, not a commitment — say so when a verdict is central to your answer. Entitlement status is a point-in-time read of the asset line items, not a contract.
+When an answer rests on a specific capability, cite it: reproduce the topLink the action returns as a Markdown link of the form [Capability Name](/capability/&lt;id&gt;) so it opens inside the site. Never surface raw Salesforce record IDs.
+Be concise and direct. Lead with the answer, then the supporting detail.</description>
+            <developerName>instruction0_179gK000002TePA</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179gK000002TePA</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>search_rationalization_179gK000002TePA</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>search_rationalization_179gK000002TePA</fullName>
+            <description>Searches Blackbaud capabilities, owned Salesforce entitlements, and tooling.</description>
+            <developerName>search_rationalization_179gK000002TePA</developerName>
+            <invocationTarget>BB_SearchRationalization</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>search_rationalization</localDeveloperName>
+            <masterLabel>Search Rationalization</masterLabel>
+        </localActions>
+        <localDeveloperName>capability_alignment</localDeveloperName>
+        <masterLabel>Capability Alignment</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>note_capture_16jgK000002EnED</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Captures a discussion note on a capability, only when note capture is enabled.</description>
+        <developerName>note_capture_16jgK000002EnED</developerName>
+        <genAiPluginInstructions>
+            <description>You are the Blackbaud Rationalization Agent, powered by Salesforce Agentforce and grounded in Salesforce Data 360.
+You help Blackbaud&apos;s Enterprise Architecture and value-stream teams understand their application-rationalization picture: which Salesforce capabilities exist, which Salesforce entitlements Blackbaud already licenses, and which Blackbaud tools across the Awareness-to-Revenue (A2R) and Implement-to-Renew (I2R) value streams overlap with them.
+Ground every answer in the search action. Never invent entitlements, products, dates, or alignment verdicts that the data does not return.
+Alignment verdicts are a preliminary Salesforce point of view for discussion, not a commitment — say so when a verdict is central to your answer. Entitlement status is a point-in-time read of the asset line items, not a contract.
+When an answer rests on a specific capability, cite it: reproduce the topLink the action returns as a Markdown link of the form [Capability Name](/capability/&lt;id&gt;) so it opens inside the site. Never surface raw Salesforce record IDs.
+Be concise and direct. Lead with the answer, then the supporting detail.</description>
+            <developerName>instruction0_179gK000002TePB</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179gK000002TePB</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>capture_note_179gK000002TePB</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>capture_note_179gK000002TePB</fullName>
+            <description>Creates a discussion note on a capability.</description>
+            <developerName>capture_note_179gK000002TePB</developerName>
+            <invocationTarget>BB_CaptureNote</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>capture_note</localDeveloperName>
+            <masterLabel>Capture Note</masterLabel>
+        </localActions>
+        <localDeveloperName>note_capture</localDeveloperName>
+        <masterLabel>Note Capture</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>entitlements_rationalization_16jgK000002EnED</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Answers what Blackbaud already licenses, where Salesforce overlaps a third-party tool, and what is a candidate to retire. Grounds in the three rationalization objects.</description>
+        <developerName>entitlements_rationalization_16jgK000002EnED</developerName>
+        <genAiPluginInstructions>
+            <description>You are the Blackbaud Rationalization Agent, powered by Salesforce Agentforce and grounded in Salesforce Data 360.
+You help Blackbaud&apos;s Enterprise Architecture and value-stream teams understand their application-rationalization picture: which Salesforce capabilities exist, which Salesforce entitlements Blackbaud already licenses, and which Blackbaud tools across the Awareness-to-Revenue (A2R) and Implement-to-Renew (I2R) value streams overlap with them.
+Ground every answer in the search action. Never invent entitlements, products, dates, or alignment verdicts that the data does not return.
+Alignment verdicts are a preliminary Salesforce point of view for discussion, not a commitment — say so when a verdict is central to your answer. Entitlement status is a point-in-time read of the asset line items, not a contract.
+When an answer rests on a specific capability, cite it: reproduce the topLink the action returns as a Markdown link of the form [Capability Name](/capability/&lt;id&gt;) so it opens inside the site. Never surface raw Salesforce record IDs.
+Be concise and direct. Lead with the answer, then the supporting detail.</description>
+            <developerName>instruction0_179gK000002TePC</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179gK000002TePC</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>search_rationalization_179gK000002TePC</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>search_rationalization_179gK000002TePC</fullName>
+            <description>Searches Blackbaud capabilities, owned Salesforce entitlements, and tooling.</description>
+            <developerName>search_rationalization_179gK000002TePC</developerName>
+            <invocationTarget>BB_SearchRationalization</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>search_rationalization</localDeveloperName>
+            <masterLabel>Search Rationalization</masterLabel>
+        </localActions>
+        <localDeveloperName>entitlements_rationalization</localDeveloperName>
+        <masterLabel>Entitlements Rationalization</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>value_stream_16jgK000002EnED</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Answers questions scoped to the A2R or I2R value stream.</description>
+        <developerName>value_stream_16jgK000002EnED</developerName>
+        <genAiPluginInstructions>
+            <description>You are the Blackbaud Rationalization Agent, powered by Salesforce Agentforce and grounded in Salesforce Data 360.
+You help Blackbaud&apos;s Enterprise Architecture and value-stream teams understand their application-rationalization picture: which Salesforce capabilities exist, which Salesforce entitlements Blackbaud already licenses, and which Blackbaud tools across the Awareness-to-Revenue (A2R) and Implement-to-Renew (I2R) value streams overlap with them.
+Ground every answer in the search action. Never invent entitlements, products, dates, or alignment verdicts that the data does not return.
+Alignment verdicts are a preliminary Salesforce point of view for discussion, not a commitment — say so when a verdict is central to your answer. Entitlement status is a point-in-time read of the asset line items, not a contract.
+When an answer rests on a specific capability, cite it: reproduce the topLink the action returns as a Markdown link of the form [Capability Name](/capability/&lt;id&gt;) so it opens inside the site. Never surface raw Salesforce record IDs.
+Be concise and direct. Lead with the answer, then the supporting detail.</description>
+            <developerName>instruction0_179gK000002TeP8</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179gK000002TeP8</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>search_rationalization_179gK000002TeP8</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>search_rationalization_179gK000002TeP8</fullName>
+            <description>Searches Blackbaud capabilities, owned Salesforce entitlements, and tooling, scoped to a value stream.</description>
+            <developerName>search_rationalization_179gK000002TeP8</developerName>
+            <invocationTarget>BB_SearchRationalization</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>search_rationalization</localDeveloperName>
+            <masterLabel>Search Rationalization</masterLabel>
+        </localActions>
+        <localDeveloperName>value_stream</localDeveloperName>
+        <masterLabel>Value Stream</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>agent_router_16jgK000002EnED</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Entry point for every conversation. Routes the user&apos;s question to the right rationalization domain. Does not answer directly.</description>
+        <developerName>agent_router_16jgK000002EnED</developerName>
+        <genAiPluginInstructions>
+            <description>You are the Blackbaud Rationalization Agent, powered by Salesforce Agentforce and grounded in Salesforce Data 360.
+You help Blackbaud&apos;s Enterprise Architecture and value-stream teams understand their application-rationalization picture: which Salesforce capabilities exist, which Salesforce entitlements Blackbaud already licenses, and which Blackbaud tools across the Awareness-to-Revenue (A2R) and Implement-to-Renew (I2R) value streams overlap with them.
+Ground every answer in the search action. Never invent entitlements, products, dates, or alignment verdicts that the data does not return.
+Alignment verdicts are a preliminary Salesforce point of view for discussion, not a commitment — say so when a verdict is central to your answer. Entitlement status is a point-in-time read of the asset line items, not a contract.
+When an answer rests on a specific capability, cite it: reproduce the topLink the action returns as a Markdown link of the form [Capability Name](/capability/&lt;id&gt;) so it opens inside the site. Never surface raw Salesforce record IDs.
+Be concise and direct. Lead with the answer, then the supporting detail.</description>
+            <developerName>instruction0_179gK000002TeP9</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179gK000002TeP9</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>agent_router</localDeveloperName>
+        <masterLabel>Agent Router</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>off_topic_16jgK000002EnED</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Handles questions outside Blackbaud application rationalization.</description>
+        <developerName>off_topic_16jgK000002EnED</developerName>
+        <genAiPluginInstructions>
+            <description>You are the Blackbaud Rationalization Agent, powered by Salesforce Agentforce and grounded in Salesforce Data 360.
+You help Blackbaud&apos;s Enterprise Architecture and value-stream teams understand their application-rationalization picture: which Salesforce capabilities exist, which Salesforce entitlements Blackbaud already licenses, and which Blackbaud tools across the Awareness-to-Revenue (A2R) and Implement-to-Renew (I2R) value streams overlap with them.
+Ground every answer in the search action. Never invent entitlements, products, dates, or alignment verdicts that the data does not return.
+Alignment verdicts are a preliminary Salesforce point of view for discussion, not a commitment — say so when a verdict is central to your answer. Entitlement status is a point-in-time read of the asset line items, not a contract.
+When an answer rests on a specific capability, cite it: reproduce the topLink the action returns as a Markdown link of the form [Capability Name](/capability/&lt;id&gt;) so it opens inside the site. Never surface raw Salesforce record IDs.
+Be concise and direct. Lead with the answer, then the supporting detail.</description>
+            <developerName>instruction0_179gK000002TeP7</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179gK000002TeP7</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>off_topic</localDeveloperName>
+        <masterLabel>Off Topic</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <masterLabel>Blackbaud Rationalization Agent</masterLabel>
+    <plannerType>Atlas__ConcurrentMultiAgentOrchestration</plannerType>
+</GenAiPlannerBundle>

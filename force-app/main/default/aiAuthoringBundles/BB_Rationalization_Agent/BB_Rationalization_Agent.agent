@@ -15,7 +15,7 @@ config:
     agent_label: "Blackbaud Rationalization Agent"
     description: "Agentforce agent for the Blackbaud capability-alignment site. Grounds in Blackbaud capabilities, owned Salesforce entitlements, and A2R/I2R tooling to answer application-rationalization questions."
     agent_type: "AgentforceServiceAgent"
-    default_agent_user: "SET_AGENT_USER_BEFORE_PUBLISH@example.com"
+    default_agent_user: "serviceagentagentforce082026141345909421@example.com"
 
 variables:
     allowWrites: mutable boolean = False

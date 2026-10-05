@@ -16,11 +16,14 @@ app.use(express.json());
 // and the five fixes in the Salesforce Agent API reference: api.salesforce.com
 // host, /einstein/ai-agent/v1 path, JWT client-credentials token, bypassUser:false,
 // and a structured message body with the My Domain in instanceConfig.endpoint.
-const SF_AGENT_ID = process.env.SF_AGENT_ID || null;
-const SF_CLIENT_ID = process.env.SF_CLIENT_ID;
-const SF_CLIENT_SECRET = process.env.SF_CLIENT_SECRET;
-const SF_INSTANCE_URL = (process.env.SF_INSTANCE_URL || '').replace(/\/+$/, '');
-const SF_LOGIN_URL = process.env.SF_LOGIN_URL || SF_INSTANCE_URL;
+const SF_AGENT_ID = (process.env.SF_AGENT_ID || '').trim() || null;
+// .trim() every env-derived value: config vars set via the Heroku CLI can pick
+// up a trailing newline/space, which makes `new URL()`/fetch throw "Failed to
+// parse URL" (seen on first live call) or silently break OAuth on the secret.
+const SF_CLIENT_ID = (process.env.SF_CLIENT_ID || '').trim();
+const SF_CLIENT_SECRET = (process.env.SF_CLIENT_SECRET || '').trim();
+const SF_INSTANCE_URL = (process.env.SF_INSTANCE_URL || '').trim().replace(/\/+$/, '');
+const SF_LOGIN_URL = (process.env.SF_LOGIN_URL || SF_INSTANCE_URL).trim().replace(/\/+$/, '');
 const AGENT_API_HOST = process.env.SF_AGENT_API_HOST || 'https://api.salesforce.com';
 const AGENT_API_BASE = '/einstein/ai-agent/v1';
 const ALLOW_WRITES = process.env.ALLOW_WRITES === 'true';
