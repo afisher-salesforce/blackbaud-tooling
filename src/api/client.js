@@ -86,3 +86,15 @@ export async function sendAgentMessage(sessionId, text) {
     body: JSON.stringify({ message: text }),
   });
 }
+
+// DELETE /api/agent/sessions/:id — end a session (best-effort; ignores errors so
+// a reset never blocks the UI).
+export async function deleteAgentSession(sessionId) {
+  if (!sessionId) return true;
+  try {
+    await fetch(`/api/agent/sessions/${encodeURIComponent(sessionId)}`, { method: 'DELETE' });
+  } catch {
+    /* best-effort */
+  }
+  return true;
+}

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Bot, Send, X, CircleDashed, Sparkles, FileText } from 'lucide-react';
-import { getAgentConfig, createAgentSession, sendAgentMessage } from '../api/client';
+import { Bot, Send, X, CircleDashed, Sparkles, FileText, RotateCcw } from 'lucide-react';
+import { getAgentConfig, createAgentSession, sendAgentMessage, deleteAgentSession } from '../api/client';
 
 /**
  * RationalizationAgentChat — a slide-over chat drawer backed by the Agentforce
@@ -139,6 +139,17 @@ export function AgentChatProvider({ children }) {
     [available, send]
   );
 
+  // Clear the conversation and start a fresh session — ends the current Agent API
+  // session (best-effort) so the next question begins clean, no page refresh.
+  const reset = useCallback(() => {
+    const old = sessionRef.current;
+    sessionRef.current = null;
+    setMessages([]);
+    setInput('');
+    setBusy(false);
+    deleteAgentSession(old);
+  }, []);
+
   return (
     <AgentChatContext.Provider value={{ openAgent, available }}>
       {children}
@@ -153,9 +164,22 @@ export function AgentChatProvider({ children }) {
                 <Bot size={18} style={{ color: 'var(--bb-accent)' }} />
                 <span className="text-sm font-semibold text-th-primary">Rationalization Agent</span>
               </div>
-              <button onClick={() => setOpen(false)} className="text-th-faint hover:text-th-secondary" aria-label="Close">
-                <X size={18} />
-              </button>
+              <div className="flex items-center gap-1">
+                {messages.length > 0 && (
+                  <button
+                    onClick={reset}
+                    className="flex items-center gap-1 px-2 py-1 rounded-md text-th-faint hover:text-th-secondary hover:bg-surface-card-hover transition-colors"
+                    title="Start a new conversation"
+                    aria-label="New conversation"
+                  >
+                    <RotateCcw size={14} />
+                    <span className="text-[11px] font-medium hidden sm:inline">New chat</span>
+                  </button>
+                )}
+                <button onClick={() => setOpen(false)} className="text-th-faint hover:text-th-secondary p-1" aria-label="Close">
+                  <X size={18} />
+                </button>
+              </div>
             </div>
 
             {/* Body */}

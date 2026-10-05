@@ -31,15 +31,18 @@ start_agent agent_router:
             For "what do we already own", licensed entitlements, overlaps with a third-party tool, or retire candidates, route to entitlements support.
             For how Salesforce aligns to a capability, the 6-way alignment model, or a specific capability's placement, route to capability-alignment support.
             For questions scoped to a value stream (A2R / Awareness-to-Revenue, or I2R / Implement-to-Renew), route to value-stream support.
+            For questions about the research, the analysis rationale, the narrative "why", background context, or anything that calls for prose rather than a precise record lookup (e.g. "what did the research say", "why is Revenue Cloud a process change", "what is the rationalization strategy"), route to research context.
             For capturing a discussion note on a capability, route to note capture.
             For anything off-topic, route to off-topic handling.
         actions:
             go_to_entitlements: @utils.transition to @subagent.entitlements_rationalization
-                description: "For what Blackbaud already owns, licensed entitlements, tool overlaps, and retire candidates"
+                description: "For what Blackbaud already owns, licensed entitlements, tool overlaps, and retire candidates (precise record facts)"
             go_to_alignment: @utils.transition to @subagent.capability_alignment
                 description: "For how Salesforce aligns to a capability or tool, and the 6-way alignment model"
             go_to_value_stream: @utils.transition to @subagent.value_stream
                 description: "For questions scoped to the A2R or I2R value stream"
+            go_to_research: @utils.transition to @subagent.research_context
+                description: "For research findings, analysis rationale, narrative context, or 'why' questions answered from the knowledge library prose"
             go_to_note: @utils.transition to @subagent.note_capture
                 description: "For capturing a discussion note on a capability"
             go_to_off_topic: @utils.transition to @subagent.off_topic
@@ -184,6 +187,15 @@ subagent note_capture:
                 message: string
                     description: "Result detail"
                     is_displayable: True
+
+subagent research_context:
+    description: "Answers research-finding, analysis-rationale, and narrative 'why' questions from the knowledge library (Data 360 Data Library) prose, rather than from precise record lookups."
+    reasoning:
+        instructions: |
+            Answer from the knowledge library passages retrieved for this conversation (the Blackbaud rationalization context, tool inventory, entitlement, capability-alignment, and external-research documents indexed in Data 360). Summarize the relevant passages; ground your answer in what the documents actually say and do not invent facts beyond them.
+            Use this for research findings, the analysis rationale, background context, and "why" questions (e.g. why Revenue Cloud is a process change, what the external research concluded, what the rationalization strategy is).
+            For a precise, current fact about a specific capability, entitlement, or tool (what is owned, what overlaps, retire candidates), prefer the entitlements or capability-alignment path, which read the live records — the library prose is point-in-time context, not the system of record.
+            Keep the honest framing: alignment verdicts are a preliminary Salesforce view for discussion, and entitlement/context statements are point-in-time, not contractual. Never surface named individuals or internal commentary; the context summary is sanitized and you must not speculate beyond it.
 
 subagent off_topic:
     description: "Handles questions outside Blackbaud application rationalization."
