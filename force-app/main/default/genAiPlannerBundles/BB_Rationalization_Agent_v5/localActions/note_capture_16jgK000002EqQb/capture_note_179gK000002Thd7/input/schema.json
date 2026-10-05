@@ -1,0 +1,28 @@
+{
+  "required" : [ "capabilityExternalId", "note" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "capabilityExternalId" : {
+      "title" : "Capability External Id",
+      "description" : "External id of the capability the note is about",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "capturedBy" : {
+      "title" : "Captured By",
+      "description" : "Who left the note",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "note" : {
+      "title" : "Note",
+      "description" : "The note text",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
