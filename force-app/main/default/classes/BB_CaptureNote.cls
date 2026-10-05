@@ -49,19 +49,14 @@ global with sharing class BB_CaptureNote {
             r.message = 'capabilityExternalId and note are required.';
             return r;
         }
-        List<BB_Capability__c> caps = [
-            SELECT Id
-            FROM BB_Capability__c
-            WHERE External_Id__c = :req.capabilityExternalId
-            LIMIT 1
-        ];
-        if (caps.isEmpty()) {
+        BB_Capability__c cap = resolveCapability(req.capabilityExternalId);
+        if (cap == null) {
             r.success = false;
-            r.message = 'No capability found for external id "' + req.capabilityExternalId + '".';
+            r.message = 'No capability found matching "' + req.capabilityExternalId + '".';
             return r;
         }
         BB_Alignment_Note__c n = new BB_Alignment_Note__c(
-            Capability__c = caps[0].Id,
+            Capability__c = cap.Id,
             Note__c = req.note.length() > 8000 ? req.note.substring(0, 8000) : req.note,
             Captured_By__c = String.isBlank(req.capturedBy) ? 'Agent' : req.capturedBy.left(120),
             Captured_At__c = System.now(),
@@ -77,5 +72,47 @@ global with sharing class BB_CaptureNote {
             r.message = 'Could not save note: ' + e.getMessage();
         }
         return r;
+    }
+
+    /**
+     * Resolve a capability from a loose reference the agent may pass — the exact
+     * External_Id__c (e.g. "revenue-forecasting"), the exact Name (e.g.
+     * "Forecasting & Pipeline"), or a partial/guessed term (e.g. "forecasting").
+     * Tries most-specific first; returns null only if nothing plausibly matches.
+     */
+    static BB_Capability__c resolveCapability(String ref) {
+        String key = ref == null ? '' : ref.trim();
+        if (String.isBlank(key)) {
+            return null;
+        }
+        // 1) exact external id
+        List<BB_Capability__c> hits = [SELECT Id FROM BB_Capability__c WHERE External_Id__c = :key LIMIT 1];
+        if (!hits.isEmpty()) {
+            return hits[0];
+        }
+        // 2) exact name
+        hits = [SELECT Id FROM BB_Capability__c WHERE Name = :key LIMIT 1];
+        if (!hits.isEmpty()) {
+            return hits[0];
+        }
+        // 3) fuzzy: external id or name contains the term (single unambiguous hit only)
+        String likeTerm = '%' + key + '%';
+        hits = [
+            SELECT Id
+            FROM BB_Capability__c
+            WHERE External_Id__c LIKE :likeTerm OR Name LIKE :likeTerm
+            LIMIT 2
+        ];
+        if (hits.size() == 1) {
+            return hits[0];
+        }
+        // 4) last resort: match the term against hyphen-normalized external ids
+        //    ("forecasting" -> matches "revenue-forecasting").
+        String norm = '%' + key.toLowerCase().replace(' ', '-') + '%';
+        hits = [SELECT Id FROM BB_Capability__c WHERE External_Id__c LIKE :norm LIMIT 2];
+        if (hits.size() == 1) {
+            return hits[0];
+        }
+        return null;
     }
 }
