@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retire_Candidate__c</fullName>
+    <description>True when this tool is a candidate to retire by activating an owned Salesforce entitlement.</description>
+    <label>Retire Candidate</label><type>Checkbox</type><defaultValue>false</defaultValue>
+</CustomField>

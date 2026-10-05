@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overlaps_SF__c</fullName>
+    <description>True when the parent capability aligns to Salesforce (native/integrates/data360/partial).</description>
+    <label>Overlaps Salesforce</label><type>Checkbox</type><defaultValue>false</defaultValue>
+</CustomField>

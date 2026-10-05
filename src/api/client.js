@@ -61,3 +61,28 @@ export async function deleteNote(id) {
   }
   return true;
 }
+
+// ─── Rationalization Agent (Agentforce Agent API via the BFF) ────────────────
+
+// GET /api/agent/config — { agentId, configured, status, writesEnabled }.
+export async function getAgentConfig() {
+  return jsonFetch('/api/agent/config');
+}
+
+// POST /api/agent/sessions — returns { sessionId, ... }.
+export async function createAgentSession() {
+  return jsonFetch('/api/agent/sessions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({}),
+  });
+}
+
+// POST /api/agent/sessions/:id/messages — returns the agent's reply payload.
+export async function sendAgentMessage(sessionId, text) {
+  return jsonFetch(`/api/agent/sessions/${encodeURIComponent(sessionId)}/messages`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text }),
+  });
+}

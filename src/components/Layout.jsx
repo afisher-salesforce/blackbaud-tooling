@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Bot } from 'lucide-react';
 import Sidebar, { NAV_ITEMS } from './Sidebar';
 import ThemeToggle from './ThemeToggle';
 import ConnectionStatus from './ConnectionStatus';
+import { useAgentChat } from './RationalizationAgentChat';
 
 export default function Layout({ children }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const location = useLocation();
+  const { openAgent } = useAgentChat();
 
   const current = NAV_ITEMS.find((n) => location.pathname.startsWith(n.to));
   const pageTitle = current ? current.label : 'Capability Alignment';
@@ -34,6 +36,19 @@ export default function Layout({ children }) {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => openAgent()}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-md border transition-colors"
+              style={{
+                backgroundColor: 'color-mix(in srgb, var(--bb-accent) 10%, transparent)',
+                borderColor: 'color-mix(in srgb, var(--bb-accent) 25%, transparent)',
+                color: 'var(--bb-accent)',
+              }}
+              title="Ask the Rationalization Agent"
+            >
+              <Bot size={14} />
+              <span className="text-xs font-medium hidden sm:inline">Ask the Agent</span>
+            </button>
             <ConnectionStatus />
             <ThemeToggle />
             <div className="w-px h-6 bg-surface-border mx-1" />

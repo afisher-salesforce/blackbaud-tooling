@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expiry__c</fullName>
+    <description>Near-term term end (text, e.g. "~Jan 2027"); null when not near-term.</description>
+    <label>Expiry</label><length>40</length><type>Text</type><unique>false</unique>
+</CustomField>

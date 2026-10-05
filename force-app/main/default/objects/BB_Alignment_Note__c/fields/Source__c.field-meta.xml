@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source__c</fullName>
+    <description>Whether the note came from a reviewer or the agent.</description>
+    <label>Source</label><type>Picklist</type>
+    <valueSet><valueSetDefinition><sorted>false</sorted>
+        <value><fullName>Reviewer</fullName><default>true</default><label>Reviewer</label></value>
+        <value><fullName>Agent</fullName><default>false</default><label>Agent</label></value>
+    </valueSetDefinition></valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Entitlement__c</fullName>
+    <description>The owned Salesforce entitlement covering this capability.</description>
+    <label>Primary Entitlement</label>
+    <referenceTo>BB_Entitlement__c</referenceTo>
+    <relationshipLabel>Capabilities</relationshipLabel>
+    <relationshipName>Capabilities</relationshipName>
+    <type>Lookup</type>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

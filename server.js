@@ -11,14 +11,59 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 app.use(express.json());
 
-// ─── Future-agent seam (RESERVED, disabled) ─────────────────────────────────
-// When Blackbaud provisions Salesforce org access, a Headless 360 / Aiforce
-// "rationalization agent" drops in here exactly like the DISW_Support_Assistant
-// path: set SF_AGENT_ID + client-credentials vars and wire the Agent API proxy.
-// Until then the route returns 501 and /api/health reports agentConfigured:false,
-// so the roadmap tile renders honestly without any org wiring.
+// ─── Rationalization Agent (Agentforce Agent API) ───────────────────────────
+// Activates when the IDO-org config vars are set. Mirrors the DISW agent path
+// and the five fixes in the Salesforce Agent API reference: api.salesforce.com
+// host, /einstein/ai-agent/v1 path, JWT client-credentials token, bypassUser:false,
+// and a structured message body with the My Domain in instanceConfig.endpoint.
 const SF_AGENT_ID = process.env.SF_AGENT_ID || null;
-const AGENT_CONFIGURED = !!(SF_AGENT_ID && process.env.SF_CLIENT_ID);
+const SF_CLIENT_ID = process.env.SF_CLIENT_ID;
+const SF_CLIENT_SECRET = process.env.SF_CLIENT_SECRET;
+const SF_INSTANCE_URL = (process.env.SF_INSTANCE_URL || '').replace(/\/+$/, '');
+const SF_LOGIN_URL = process.env.SF_LOGIN_URL || SF_INSTANCE_URL;
+const AGENT_API_HOST = process.env.SF_AGENT_API_HOST || 'https://api.salesforce.com';
+const AGENT_API_BASE = '/einstein/ai-agent/v1';
+const ALLOW_WRITES = process.env.ALLOW_WRITES === 'true';
+const AGENT_CONFIGURED = !!(SF_AGENT_ID && SF_CLIENT_ID && SF_CLIENT_SECRET && SF_INSTANCE_URL);
+
+let agentTokenCache = { accessToken: null, expiresAt: 0 };
+async function getAgentToken() {
+  const now = Date.now();
+  if (agentTokenCache.accessToken && agentTokenCache.expiresAt > now + 5 * 60 * 1000) {
+    return agentTokenCache.accessToken;
+  }
+  const params = new URLSearchParams({
+    grant_type: 'client_credentials',
+    client_id: SF_CLIENT_ID,
+    client_secret: SF_CLIENT_SECRET,
+  });
+  const resp = await fetch(`${SF_LOGIN_URL}/services/oauth2/token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
+  });
+  if (!resp.ok) throw new Error(`Salesforce auth failed: ${resp.status} ${await resp.text()}`);
+  const data = await resp.json();
+  agentTokenCache = { accessToken: data.access_token, expiresAt: now + 7200000 };
+  return data.access_token;
+}
+
+let agentMsgSeq = 0;
+function buildSessionBody(reqBody) {
+  return {
+    externalSessionKey:
+      globalThis.crypto?.randomUUID?.() ?? `sess-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    instanceConfig: { endpoint: SF_INSTANCE_URL },
+    streamingCapabilities: { chunkTypes: ['Text'] },
+    bypassUser: false,
+    ...(reqBody || {}),
+  };
+}
+function buildMessageBody(reqBody) {
+  const m = reqBody?.message;
+  const text = typeof m === 'string' ? m : typeof reqBody?.text === 'string' ? reqBody.text : m?.text || '';
+  return { message: { sequenceId: ++agentMsgSeq, type: 'Text', text } };
+}
 
 // ─── Health ──────────────────────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
@@ -92,19 +137,86 @@ app.delete('/api/notes/:id', async (req, res) => {
   }
 });
 
-// GET /api/agent/config — whether the future rationalization agent is wired.
+// GET /api/agent/config — whether the rationalization agent is wired.
 app.get('/api/agent/config', (_req, res) => {
-  res.json({ agentId: SF_AGENT_ID, configured: AGENT_CONFIGURED, status: AGENT_CONFIGURED ? 'ready' : 'roadmap' });
+  res.json({
+    agentId: SF_AGENT_ID,
+    configured: AGENT_CONFIGURED,
+    status: AGENT_CONFIGURED ? 'ready' : 'roadmap',
+    writesEnabled: ALLOW_WRITES,
+  });
 });
 
-// Reserved agent routes — disabled until org access is provisioned.
-app.all('/api/agent/sessions*', (_req, res) => {
-  res.status(501).json({
-    error: 'Agent not configured',
-    status: 'roadmap',
-    message:
-      'The Headless 360 / Aiforce rationalization agent is on the roadmap. It activates once Blackbaud provisions Salesforce org access and SF_AGENT_ID is set.',
-  });
+// Guard: if the agent isn't configured, every agent route returns 501 so the UI
+// shows the roadmap state (identical behavior to before activation).
+function requireAgent(res) {
+  if (!AGENT_CONFIGURED) {
+    res.status(501).json({
+      error: 'Agent not configured',
+      status: 'roadmap',
+      message:
+        'The rationalization agent activates once the IDO-org config vars (SF_AGENT_ID, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_INSTANCE_URL) are set.',
+    });
+    return false;
+  }
+  return true;
+}
+
+// POST /api/agent/sessions — create an Agent API session.
+app.post('/api/agent/sessions', async (req, res) => {
+  if (!requireAgent(res)) return;
+  try {
+    const token = await getAgentToken();
+    const url = `${AGENT_API_HOST}${AGENT_API_BASE}/agents/${SF_AGENT_ID}/sessions`;
+    const sf = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(buildSessionBody(req.body)),
+    });
+    const text = await sf.text();
+    let data;
+    try { data = JSON.parse(text); } catch { return res.status(sf.status || 502).json({ error: 'Invalid Agent API response', body: text.slice(0, 200) }); }
+    if (!sf.ok) { agentTokenCache = { accessToken: null, expiresAt: 0 }; return res.status(sf.status).json(data); }
+    res.json(data);
+  } catch (err) {
+    console.error('[agent] session error:', err.message);
+    res.status(502).json({ error: 'Agent API error', message: err.message });
+  }
+});
+
+// POST /api/agent/sessions/:sessionId/messages — send a message, return the reply.
+app.post('/api/agent/sessions/:sessionId/messages', async (req, res) => {
+  if (!requireAgent(res)) return;
+  try {
+    const token = await getAgentToken();
+    const url = `${AGENT_API_HOST}${AGENT_API_BASE}/sessions/${req.params.sessionId}/messages`;
+    const sf = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(buildMessageBody(req.body)),
+    });
+    const text = await sf.text();
+    let data;
+    try { data = JSON.parse(text); } catch { return res.status(sf.status || 502).send(text); }
+    res.status(sf.status).json(data);
+  } catch (err) {
+    console.error('[agent] message error:', err.message);
+    res.status(502).json({ error: 'Agent API error', message: err.message });
+  }
+});
+
+// DELETE /api/agent/sessions/:sessionId — end a session.
+app.delete('/api/agent/sessions/:sessionId', async (req, res) => {
+  if (!requireAgent(res)) return;
+  try {
+    const token = await getAgentToken();
+    const url = `${AGENT_API_HOST}${AGENT_API_BASE}/sessions/${req.params.sessionId}`;
+    const sf = await fetch(url, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+    if (sf.status === 204) return res.status(204).end();
+    res.status(sf.status).json(await sf.json().catch(() => ({})));
+  } catch (err) {
+    res.status(502).json({ error: 'Agent API error', message: err.message });
+  }
 });
 
 // ─── Trailhead recommendations ───────────────────────────────────────────────
@@ -139,6 +251,7 @@ app.listen(PORT, () => {
   console.log(`  ─────────────────────────────────────────────`);
   console.log(`  Port:            ${PORT}`);
   console.log(`  Agent:           ${AGENT_CONFIGURED ? SF_AGENT_ID : 'roadmap (not configured)'}`);
+  console.log(`  Agent writes:    ${ALLOW_WRITES ? 'ENABLED' : 'disabled (read-only)'}`);
   console.log(`  Trailhead:       staged catalog (deterministic)`);
   console.log(`  Notes store:     ${notesDb.isEnabled() ? 'Heroku Postgres (shared)' : 'local (per-browser, no DATABASE_URL)'}\n`);
   // Warm the table at boot so the first reviewer doesn't pay the create cost.

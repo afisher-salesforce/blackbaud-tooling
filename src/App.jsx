@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import ErrorBoundary from './components/ErrorBoundary';
+import { AgentChatProvider } from './components/RationalizationAgentChat';
 import Overview from './pages/Overview';
 import CapabilityMap from './pages/CapabilityMap';
 import CapabilityDetail from './pages/CapabilityDetail';
@@ -9,6 +10,7 @@ import ValueStream from './pages/ValueStream';
 
 export default function App() {
   return (
+    <AgentChatProvider>
     <Layout>
       <ErrorBoundary>
         <Routes>
@@ -22,5 +24,6 @@ export default function App() {
         </Routes>
       </ErrorBoundary>
     </Layout>
+    </AgentChatProvider>
   );
 }

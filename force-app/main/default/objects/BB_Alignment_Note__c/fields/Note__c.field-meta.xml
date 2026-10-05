@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Note__c</fullName>
+    <description>The note text.</description>
+    <label>Note</label><length>8000</length><required>true</required><type>LongTextArea</type><visibleLines>5</visibleLines>
+</CustomField>

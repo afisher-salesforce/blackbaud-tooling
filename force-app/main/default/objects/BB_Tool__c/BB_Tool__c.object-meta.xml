@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A Blackbaud tool from the A2R/I2R inventory, linked to the capability it serves. Grounds the agent on "what tooling do we run".</description>
+    <enableActivities>false</enableActivities>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>BB Tool</label>
+    <pluralLabel>BB Tools</pluralLabel>
+    <nameField><label>Tool Name</label><type>Text</type></nameField>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>
