@@ -11,9 +11,9 @@
  * (rationalization-context-summary.md) is hand-authored, NOT generated here.
  */
 
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { dirname, join, basename } from 'node:path';
 import { CAPABILITIES, capabilityEntitlement } from '../src/content/capabilities.js';
 import { OWNED_PRODUCTS, ENTITLEMENT_AS_OF } from '../src/content/entitlements.js';
 import { alignmentMeta } from '../src/content/alignment.js';
@@ -108,7 +108,30 @@ function capabilityMap() {
   return md;
 }
 
-writeFileSync(join(DIR, 'blackbaud-tool-inventory.md'), toolInventory());
-writeFileSync(join(DIR, 'salesforce-entitlements.md'), entitlements());
-writeFileSync(join(DIR, 'salesforce-capability-map.md'), capabilityMap());
-console.log('Wrote 3 data-derived corpus files to datacloud/corpus/');
+// Write each file as .md (repo source of truth) AND a .txt copy under txt/ —
+// the Agentforce Data Library "Upload Files" UI does not accept .md, so the
+// .txt copies are what gets uploaded. Keep them in lockstep here so they never
+// drift. (The hand-authored rationalization-context-summary.md is copied to txt
+// by the same convention via a separate pass below.)
+const TXT = join(DIR, 'txt');
+mkdirSync(TXT, { recursive: true });
+function emit(name, content) {
+  writeFileSync(join(DIR, `${name}.md`), content);
+  writeFileSync(join(TXT, `${name}.txt`), content);
+}
+emit('blackbaud-tool-inventory', toolInventory());
+emit('salesforce-entitlements', entitlements());
+emit('salesforce-capability-map', capabilityMap());
+
+// Mirror the hand-authored files (not generated here) to .txt as well, so the
+// txt/ folder is always the complete, uploadable set.
+for (const f of readdirSync(DIR)) {
+  if (!f.endsWith('.md')) continue;
+  const name = basename(f, '.md');
+  const txtPath = join(TXT, `${name}.txt`);
+  // Only mirror hand-authored ones we didn't just emit.
+  if (!['blackbaud-tool-inventory', 'salesforce-entitlements', 'salesforce-capability-map'].includes(name)) {
+    writeFileSync(txtPath, readFileSync(join(DIR, f), 'utf8'));
+  }
+}
+console.log('Wrote corpus .md files + .txt copies (datacloud/corpus/ and datacloud/corpus/txt/).');

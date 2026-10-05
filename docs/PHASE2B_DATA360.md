@@ -55,6 +55,26 @@ prose to the library. Data 360 is enabled in the IDO org (`trailsignup-f1af94b91
   the agent must not surface names or candid commentary (the summary carries none; the system prompt forbids it).
 - No site/Heroku change needed — the drawer renders the richer answers as-is.
 
+## Source-of-truth note (important)
+
+The Data Library **retriever action** on the `research_context` subagent, and any
+retire-candidate **answer tuning**, were configured in **Agentforce Builder** (live v3+),
+not in the `.agent` script. The repo now mirrors this via the retrieved
+`genAiPlannerBundles/BB_Rationalization_Agent_v3` (contains
+`research_context/AnswerQuestionsWithAgenticRetriever_*`). **Agentforce Builder is
+authoritative** for the retriever + instruction tuning — do NOT `sf agent publish` from
+the repo `.agent`, which would regenerate the planner and drop the UI-added retriever
+action. Edit those in Builder and commit versions there; retrieve the planner bundle
+(`sf project retrieve start --metadata "GenAiPlannerBundle:BB_Rationalization_Agent_v<n>" --api-version 65.0`)
+if you want the repo to catch up. Note the project `sourceApiVersion` is **65.0** (the
+agent metadata requires v65+; a v64 retrieve fails with UNSUPPORTED_API_VERSION).
+
+The Data Library files are uploaded through the **Agentforce Data Library UI** ("Upload
+Files" accepts PDF/HTML/**TXT** — not `.md`; use `datacloud/corpus/txt/`). The earlier
+`scripts/upload-datalibrary.mjs` ContentVersion path is superseded by the UI upload and
+its 5 ContentVersions can be deleted; the script is retained only as an API-ingest
+reference.
+
 ## Notes
 - Data Library *creation* + *attachment* are UI steps (the API surface is uneven); the upload of source files is
   scripted. If Data Library API ingest matures, the upload can be folded into library creation.
