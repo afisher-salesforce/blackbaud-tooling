@@ -23,7 +23,7 @@ export function useAgentChat() {
 const SUGGESTED = [
   'What Salesforce capabilities do we already own?',
   'Where does Salesforce overlap with Gong?',
-  'What are the retire candidates in A2R?',
+  'Where does Salesforce overlap our A2R tools?',
   'What covers our forecasting stack?',
 ];
 
@@ -187,7 +187,7 @@ export function AgentChatProvider({ children }) {
               {status === 'roadmap' && (
                 <div className="rounded-lg border border-violet-500/25 bg-violet-500/10 p-3 text-sm text-th-muted leading-relaxed">
                   The agent isn’t enabled on this deployment yet. Once the IDO-org config vars are set, it answers
-                  grounded questions about what Blackbaud owns, overlaps, and can retire.
+                  grounded questions about what Blackbaud owns, where it overlaps a tool, and what could consolidate.
                 </div>
               )}
               {status === 'ready' && messages.length === 0 && (

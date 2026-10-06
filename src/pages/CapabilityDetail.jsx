@@ -3,9 +3,10 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Package, Users, Cloud, FileText, UserCheck, HelpCircle, BadgeCheck } from 'lucide-react';
 import AlignmentChip from '../components/AlignmentChip';
 import EntitlementChip from '../components/EntitlementChip';
-import RetireCallout from '../components/RetireCallout';
+import OverlapCallout from '../components/OverlapCallout';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 import DiscussionNotes from '../components/DiscussionNotes';
+import ToolingSection from '../components/ToolingSection';
 import TrailheadRail from '../components/TrailheadRail';
 import { getCapability, capabilityEntitlement } from '../content/capabilities';
 import { alignmentMeta } from '../content/alignment';
@@ -84,9 +85,9 @@ export default function CapabilityDetail() {
         </div>
       </div>
 
-      {/* "You already own this" — shown when owned AND overlaps a retireable tool */}
-      {['owned', 'owned-expiring'].includes(ent.status) && cap.retires?.length ? (
-        <RetireCallout products={ent.info?.products || []} retires={cap.retires} expiring={ent.info?.expiry} />
+      {/* "You already own an overlapping capability" — owned AND overlaps a tool */}
+      {['owned', 'owned-expiring'].includes(ent.status) && cap.overlaps?.length ? (
+        <OverlapCallout products={ent.info?.products || []} overlaps={cap.overlaps} expiring={ent.info?.expiry} />
       ) : null}
 
       {ent.status !== 'na' && (
@@ -131,6 +132,9 @@ export default function CapabilityDetail() {
 
       {/* Discussion notes capture */}
       <DiscussionNotes capabilityId={cap.id} />
+
+      {/* Blackbaud tooling capture — per-tool commercial fields written to Salesforce */}
+      <ToolingSection capabilityExternalId={cap.id} />
 
       {/* Trailhead learning rail — only where SF aligns and a path is staged */}
       {cap.trailheadSlug && <TrailheadRail slug={cap.trailheadSlug} />}

@@ -87,6 +87,22 @@ export async function sendAgentMessage(sessionId, text) {
   });
 }
 
+// ─── BB_Tool__c commercial-data capture ─────────────────────────────────────
+
+// GET /api/tools/:capabilityExternalId — tools under a capability + captured fields.
+export async function getTools(capabilityExternalId) {
+  return jsonFetch(`/api/tools/${encodeURIComponent(capabilityExternalId)}`);
+}
+
+// POST /api/tool/:externalId — update the 4 captured fields on one tool.
+export async function updateTool(externalId, fields) {
+  return jsonFetch(`/api/tool/${encodeURIComponent(externalId)}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(fields),
+  });
+}
+
 // DELETE /api/agent/sessions/:id — end a session (best-effort; ignores errors so
 // a reset never blocks the UI).
 export async function deleteAgentSession(sessionId) {

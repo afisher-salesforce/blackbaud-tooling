@@ -140,6 +140,86 @@ app.delete('/api/notes/:id', async (req, res) => {
   }
 });
 
+// ─── BB_Tool__c commercial-data capture (per-tool write-back) ────────────────
+// Reads/writes the 4 captured fields (Priority, Contract Maturity, Users,
+// Contract Amount) on BB_Tool__c via the Salesforce Data API, using the same
+// client-credentials token as the agent proxy. Requires the SF config vars (same
+// gate as the agent). ALLOW_WRITES mirrors the honest signal; the real control is
+// org FLS on the running user.
+const SF_DATA_API_VER = process.env.SF_API_VER || 'v65.0';
+
+async function sfData(method, path, body) {
+  const token = await getAgentToken();
+  const resp = await fetch(`${SF_INSTANCE_URL}/services/data/${SF_DATA_API_VER}${path}`, {
+    method,
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/json' },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  });
+  const text = await resp.text();
+  let data;
+  try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+  if (!resp.ok) {
+    const msg = Array.isArray(data) ? data[0]?.message : data?.message || `SF data ${resp.status}`;
+    const err = new Error(msg || `SF data error ${resp.status}`);
+    err.status = resp.status;
+    throw err;
+  }
+  return data;
+}
+
+// GET /api/tools/:capabilityExternalId — the tools under a capability + their
+// captured commercial fields, for the site's Blackbaud-tooling section.
+app.get('/api/tools/:capabilityExternalId', async (req, res) => {
+  if (!AGENT_CONFIGURED) return res.status(501).json({ error: 'Salesforce not configured', tools: [] });
+  const extId = String(req.params.capabilityExternalId || '').replace(/'/g, "\\'");
+  const soql =
+    `SELECT Id, Name, External_Id__c, Priority__c, Contract_Maturity__c, Users__c, Contract_Amount__c ` +
+    `FROM BB_Tool__c WHERE Capability__r.External_Id__c = '${extId}' ORDER BY Name`;
+  try {
+    const data = await sfData('GET', `/query/?q=${encodeURIComponent(soql)}`);
+    const tools = (data.records || []).map((r) => ({
+      id: r.Id,
+      name: r.Name,
+      externalId: r.External_Id__c,
+      priority: r.Priority__c || '',
+      contractMaturity: r.Contract_Maturity__c || '',
+      users: r.Users__c ?? '',
+      contractAmount: r.Contract_Amount__c ?? '',
+    }));
+    res.set('Cache-Control', 'no-store');
+    res.json({ tools });
+  } catch (err) {
+    console.error('[tools] read failed:', err.message);
+    res.status(502).json({ error: 'tool read error', message: err.message });
+  }
+});
+
+// POST /api/tool/:externalId — update the 4 captured fields on one BB_Tool__c by
+// External_Id__c. Null-safe partial: only provided fields are written. Gated by
+// ALLOW_WRITES (honest signal) + org FLS.
+app.post('/api/tool/:externalId', async (req, res) => {
+  if (!AGENT_CONFIGURED) return res.status(501).json({ error: 'Salesforce not configured' });
+  if (!ALLOW_WRITES) return res.status(403).json({ error: 'Writes are disabled (ALLOW_WRITES is off).' });
+  const extId = encodeURIComponent(req.params.externalId);
+  const { priority, contractMaturity, users, contractAmount } = req.body || {};
+  const fields = {};
+  if (priority !== undefined && priority !== '') fields.Priority__c = priority;
+  if (contractMaturity !== undefined && contractMaturity !== '') fields.Contract_Maturity__c = contractMaturity;
+  if (users !== undefined && users !== '') fields.Users__c = Number(users);
+  if (contractAmount !== undefined && contractAmount !== '') fields.Contract_Amount__c = Number(contractAmount);
+  if (Object.keys(fields).length === 0) {
+    return res.status(400).json({ error: 'No fields provided to update.' });
+  }
+  try {
+    // PATCH by external id upserts/updates the matching record.
+    await sfData('PATCH', `/sobjects/BB_Tool__c/External_Id__c/${extId}`, fields);
+    res.json({ success: true, updated: Object.keys(fields) });
+  } catch (err) {
+    console.error('[tools] update failed:', err.message);
+    res.status(err.status === 403 ? 403 : 502).json({ error: 'tool update error', message: err.message });
+  }
+});
+
 // GET /api/agent/config — whether the rationalization agent is wired.
 app.get('/api/agent/config', (_req, res) => {
   res.json({

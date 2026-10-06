@@ -33,7 +33,7 @@ export default function RoadmapTile() {
             </div>
             <p className="text-xs leading-relaxed text-th-muted max-w-xl">
               {available
-                ? 'A headless Agentforce agent, grounded in Salesforce — ask it in plain language what Blackbaud already owns, where Salesforce overlaps a tool, or what’s a candidate to retire. Answers cite the capability records.'
+                ? 'A headless Agentforce agent, grounded in Salesforce — ask it in plain language what Blackbaud already owns, where Salesforce overlaps a tool, or what could consolidate onto the platform. Answers cite the capability records.'
                 : 'A future headless Agentforce agent will answer this inventory in plain language, grounded in Salesforce and honoring the permission model. The backend seam is in place; it activates once Salesforce org access is provisioned.'}
             </p>
           </div>

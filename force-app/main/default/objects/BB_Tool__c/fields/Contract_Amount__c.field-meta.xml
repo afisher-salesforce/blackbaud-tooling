@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Amount__c</fullName>
+    <description>Annual contract value for this tool, captured during the review.</description>
+    <label>Contract Amount</label>
+    <required>false</required>
+    <type>Currency</type>
+    <precision>18</precision>
+    <scale>0</scale>
+</CustomField>

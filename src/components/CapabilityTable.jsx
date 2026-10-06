@@ -40,7 +40,7 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
         if (licensed === 'all') return true;
         const s = capabilityEntitlement(c).status;
         if (licensed === 'licensed') return ['owned', 'owned-expiring', 'separate-agreement'].includes(s);
-        if (licensed === 'retire') return ['owned', 'owned-expiring'].includes(s) && c.retires?.length;
+        if (licensed === 'overlap') return ['owned', 'owned-expiring'].includes(s) && c.overlaps?.length;
         return true;
       })
       .filter((c) => {
@@ -86,7 +86,7 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
           <select value={licensed} onChange={(e) => setLicensed(e.target.value)} className="rounded-md border px-2.5 py-1.5 text-xs">
             <option value="all">All entitlements</option>
             <option value="licensed">Already licensed</option>
-            <option value="retire">Owned · retire a tool</option>
+            <option value="overlap">Owned · overlaps a tool</option>
           </select>
         </div>
         <div className="relative">

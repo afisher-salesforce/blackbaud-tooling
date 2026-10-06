@@ -5,7 +5,7 @@ import DisclaimerBanner from '../components/DisclaimerBanner';
 import HeatmapGrid from '../components/HeatmapGrid';
 import RoadmapTile from '../components/RoadmapTile';
 import AlignmentChip from '../components/AlignmentChip';
-import { CAPABILITIES, TOOL_COUNT, DOMAINS, alignmentCounts, capabilitiesByStream, licensedCount, retireCandidates } from '../content/capabilities';
+import { CAPABILITIES, TOOL_COUNT, alignmentCounts, capabilitiesByStream, licensedCount, consolidationCandidates, entitlementsOwnedCount } from '../content/capabilities';
 import { ALIGNMENT_ORDER, alignmentMeta } from '../content/alignment';
 import { ENTITLEMENT_DISCLAIMER } from '../content/entitlements';
 import { BadgeCheck } from 'lucide-react';
@@ -24,7 +24,8 @@ export default function Overview() {
   const a2r = capabilitiesByStream('A2R').length;
   const i2r = capabilitiesByStream('I2R').length;
   const licensed = licensedCount();
-  const retireRows = retireCandidates();
+  const entitlementsOwned = entitlementsOwnedCount();
+  const consolidationRows = consolidationCandidates();
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -67,17 +68,19 @@ export default function Overview() {
           </div>
           <div>
             <h2 className="text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-1">
-              Start inward first — much of this is already licensed
+              Start inward first — build the platform you already own
             </h2>
             <p className="text-sm text-th-secondary leading-relaxed max-w-3xl">
-              Of the capabilities Salesforce aligns to, <strong>{licensed}</strong> are already active Blackbaud
-              entitlements — and <strong>{retireRows.length}</strong> of those directly overlap a third-party tool
-              that becomes a candidate to retire by activating what’s owned. Several active RFPs (forecasting, CLM)
-              are for capabilities Blackbaud already pays for. Filter the map to{' '}
+              Blackbaud already owns <strong>{entitlementsOwned}</strong> Salesforce entitlements, covering{' '}
+              <strong>{licensed}</strong> of the capabilities on this map — and <strong>{consolidationRows.length}</strong>{' '}
+              of those overlap a third-party tool Blackbaud also runs, so the work could be consolidated onto the
+              platform you already own and reduce context-switching across applications. Several active RFPs
+              (forecasting, CLM) are for capabilities Blackbaud already pays for. Filter the map to{' '}
               <Link to="/map" className="font-medium underline" style={{ color: 'var(--bb-accent)' }}>
-                “Owned · retire a tool”
+                “Owned · overlaps a tool”
               </Link>{' '}
-              to see them.
+              to see them. Consolidation is a platform-strategy discussion, not a directive to retire tools —
+              contract terms and prior investment decide what actually moves.
             </p>
             <p className="text-[11px] text-th-faint mt-2 italic">{ENTITLEMENT_DISCLAIMER}</p>
           </div>
@@ -85,11 +88,12 @@ export default function Overview() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <Stat value={TOOL_COUNT} label="Tools in scope" />
-        <Stat value={CAPABILITIES.length} label="Capabilities mapped" />
-        <Stat value={licensed} label="Already licensed" />
-        <Stat value={retireRows.length} label="Owned · retire a tool" />
+        <Stat value={CAPABILITIES.length} label="Capability areas assessed" />
+        <Stat value={entitlementsOwned} label="Salesforce entitlements owned" />
+        <Stat value={licensed} label="Capabilities already covered" />
+        <Stat value={consolidationRows.length} label="Overlap · consolidation candidates" />
       </div>
 
       {/* Alignment distribution */}

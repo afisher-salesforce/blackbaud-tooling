@@ -43,6 +43,10 @@
     <fieldPermissions><field>BB_Tool__c.Capability__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Tool__c.Overlaps_SF__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
     <fieldPermissions><field>BB_Tool__c.Retire_Candidate__c</field><readable>true</readable><editable>false</editable></fieldPermissions>
+    <fieldPermissions><field>BB_Tool__c.Priority__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
+    <fieldPermissions><field>BB_Tool__c.Contract_Maturity__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
+    <fieldPermissions><field>BB_Tool__c.Users__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
+    <fieldPermissions><field>BB_Tool__c.Contract_Amount__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
     <fieldPermissions><field>BB_Alignment_Note__c.Note__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
     <fieldPermissions><field>BB_Alignment_Note__c.Captured_By__c</field><readable>true</readable><editable>true</editable></fieldPermissions>
     <fieldPermissions><field>BB_Alignment_Note__c.Captured_At__c</field><readable>true</readable><editable>true</editable></fieldPermissions>

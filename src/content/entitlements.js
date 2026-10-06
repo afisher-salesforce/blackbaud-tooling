@@ -6,10 +6,11 @@
  * evidence matrix (afisher-salesforce/blackbaud-capabilities, feature/heroku-clerk-auth):
  * "Confirmed by Asset Line Items" / "Separate Agreement" / "Not currently licensed".
  *
- * WHY THIS MATTERS: the exec framing (Chris Lindner, Russ Tallon) is that teams run
- * RFPs for capabilities Blackbaud ALREADY owns. Showing entitlement status turns the
- * conversation from "Salesforce could do this" into "you already pay for this — and
- * the third-party tool it overlaps is a candidate to retire." Russ's phrase:
+ * WHY THIS MATTERS: the exec framing is that teams run RFPs for capabilities
+ * Blackbaud ALREADY owns. Showing entitlement status turns the conversation from
+ * "Salesforce could do this" into "you already pay for this — and the third-party
+ * tool it overlaps is a candidate to consolidate onto the platform you own
+ * (reducing context-switching), subject to contract terms." The guiding phrase:
  * "start inward first."
  *
  * STATUS values:

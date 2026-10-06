@@ -60,7 +60,7 @@ export const CAPABILITIES = [
     alignment: 'native',
     sfProducts: ['Collaborative Forecasting', 'Pipeline Inspection', 'Territory Management', 'Agentforce for Sales'],
     ownedKey: 'core-crm',
-    retires: ['Clari'],
+    overlaps: ['Clari'],
     draftNote:
       'Christa: Covered — Revenue Intelligence, Collaborative Forecasting, Pipeline Inspection, Einstein deal health.',
     seReview:
@@ -81,11 +81,11 @@ export const CAPABILITIES = [
     alignment: 'partial',
     sfProducts: ['Customer Experience Intelligence (CXI)', 'Einstein Conversation Insights'],
     ownedKey: 'cxi',
-    retires: ['Gong'],
+    overlaps: ['Gong'],
     draftNote:
       'Christa: Covered — Einstein Conversation Insights (call/meeting recording analysis, transcription, competitor mentions, coaching).',
     seReview:
-      'Important entitlement note: Blackbaud ALREADY owns Customer Experience Intelligence (Unlimited) — the conversation-intelligence capability that overlaps Gong is a paid, active entitlement, not a net-new buy. Still Partial on the business side: the prep call flagged that unwinding Gong is NOT a clean swap — it is woven into the sales process across Sales, Marketing and CS. So the honest message is "you already own the replacement capability; whether/when to retire Gong is a sales-process conversation, not a licensing one."',
+      'Important entitlement note: Blackbaud ALREADY owns Customer Experience Intelligence (Unlimited) — the conversation-intelligence capability that overlaps Gong is a paid, active entitlement, not a net-new buy. Still Partial on the business side: the prep call flagged that unwinding Gong is NOT a clean swap — it is woven into the sales process across Sales, Marketing and CS. So the honest message is "you already own an overlapping capability; whether/when to consolidate onto it is a sales-process conversation, not a licensing one."',
     trailheadSlug: 'conversation-insights',
     discussionPrompts: [
       'Which teams depend on Gong today, and for what exactly — coaching, deal intelligence, or forecasting signal?',
@@ -137,6 +137,7 @@ export const CAPABILITIES = [
     primaryUsers: 'Marketing',
     alignment: 'discuss',
     sfProducts: ['Marketing Cloud Account Engagement', 'Marketing Cloud Growth / Advanced'],
+    ownedKey: 'mce',
     draftNote:
       'Christa grouped Marketo with Demandbase + Qualified as Covered via Account Engagement + Agentforce chat.',
     seReview:
@@ -514,7 +515,7 @@ export const CAPABILITIES = [
     alignment: 'native',
     sfProducts: ['Agentforce', 'Agent Builder'],
     ownedKey: 'agentforce',
-    retires: ['CoPilot Studio'],
+    overlaps: ['CoPilot Studio'],
     draftNote:
       'Christa: Covered — Agentforce (Einstein Copilot Studio / Bots): low-code autonomous AI agents + conversational workflows.',
     seReview:
@@ -534,10 +535,11 @@ export const CAPABILITIES = [
     primaryUsers: 'Marketing / Operations',
     alignment: 'native',
     sfProducts: ['MuleSoft (Anypoint / Composer)', 'Flow Integration'],
+    ownedKey: 'mulesoft-dataloader',
     draftNote:
       'Christa: Covered — MuleSoft + Flow Integration provide enterprise iPaaS and API connectivity.',
     seReview:
-      'Native at the enterprise tier (MuleSoft). The honest nuance: Zapier’s long-tail SMB connector breadth is different from MuleSoft’s enterprise integration — for lightweight marketing automations, Flow/Composer fit; for the breadth of ad-hoc Zaps, confirm scope.',
+      'Native at the enterprise tier (MuleSoft) — but entitlement nuance: Blackbaud owns only MuleSoft Dataloader.io today, NOT the full Anypoint Platform / API management. So the capability is owned at the data-loader tier; broader iPaaS/API-management would be an expansion. Zapier’s long-tail SMB connector breadth is also different from MuleSoft’s enterprise integration — for lightweight automations Flow/Composer fit; confirm scope before any consolidation.',
     trailheadSlug: 'mulesoft',
     discussionPrompts: ['Is Zapier doing enterprise integration or long-tail "glue" automations? MuleSoft fits the former cleanly.'],
   },
@@ -704,7 +706,7 @@ export const CAPABILITIES = [
     alignment: 'native',
     sfProducts: ['Revenue Cloud Advanced', 'Agentforce Revenue Management (ARM)', 'CPQ Plus (legacy)'],
     ownedKey: 'revenue-cloud',
-    retires: ['SteelBrick CPQ', 'PSQuote'],
+    overlaps: ['SteelBrick CPQ', 'PSQuote'],
     isFocus: true,
     draftNote:
       'Christa: Covered — Salesforce CPQ / Revenue Cloud: PS rate cards, SOW quoting, approval matrices, contracts.',
@@ -768,7 +770,7 @@ export const CAPABILITIES = [
     draftNote:
       'Christa: Covered — Service Cloud Voice (Amazon Connect / partner telephony), Omni-Channel supervisor routing, Einstein Conversation Insights.',
     seReview:
-      'Entitlement note: Blackbaud already owns Partner Contact Center with Amazon Connect (Unlimited, 420) — so Service Cloud Voice is a paid entitlement, not a net-new buy. Integrates is still the precise placement: it brings Amazon Connect (and partner telephony) INTO the console — you keep the carrier and unify it in Service Cloud. Deliberately NOT marking Five9 as a retire candidate: the prep call left open whether Amazon Connect is a direct AWS relationship or runs through a voice partner, and Five9 may BE the carrier rather than a tool to replace. That carrier question is the thing to resolve before any consolidation claim — hence a discussion, not a retire. Noise cancellation (Krisp) is out of scope for Salesforce.',
+      'Entitlement note: Blackbaud already owns Partner Contact Center with Amazon Connect (Unlimited, 420) — so Service Cloud Voice is a paid entitlement, not a net-new buy. Integrates is still the precise placement: it brings Amazon Connect (and partner telephony) INTO the console — you keep the carrier and unify it in Service Cloud. Deliberately NOT marking Five9 as a retire candidate: the prep call left open whether Amazon Connect is a direct AWS relationship or runs through a voice partner, and Five9 may BE the carrier rather than an overlapping tool. That carrier question is the thing to resolve before any consolidation claim — hence a discussion. Noise cancellation (Krisp) is out of scope for Salesforce.',
     trailheadSlug: 'service-cloud-voice',
     discussionPrompts: [
       'Is Amazon Connect a direct AWS relationship or through a voice partner? That changes the Service Cloud Voice integration path.',
@@ -835,7 +837,7 @@ export const CAPABILITIES = [
     alignment: 'native',
     sfProducts: ['Tableau Next', 'Tableau', 'Data 360'],
     ownedKey: 'tableau',
-    retires: ['Qlik'],
+    overlaps: ['Qlik'],
     draftNote:
       'Christa: Covered — CRM Analytics (Tableau CRM) + Tableau: renewal cohort analytics, retention forecasting, ARR pipeline.',
     seReview:
@@ -1032,6 +1034,7 @@ export const CAPABILITIES = [
     primaryUsers: 'Privacy / Legal',
     alignment: 'partial',
     sfProducts: ['Privacy Center', 'Data 360 Consent Management'],
+    ownedKey: 'data-cloud',
     draftNote:
       'Christa: Covered — Salesforce Privacy Center + Data Cloud Consent Management: retention policies, RTBF, consent.',
     seReview:
@@ -1080,17 +1083,25 @@ export function capabilityEntitlement(cap) {
   return { status: 'not-licensed', info: null };
 }
 
-// Count capabilities whose capability is an active Salesforce entitlement
-// (owned / owned-expiring / separate-agreement) — the "already licensed" story.
+// Count capabilities covered by an active Salesforce entitlement
+// (owned / owned-expiring / separate-agreement) — the "already covered" story.
 export function licensedCount(rows = CAPABILITIES) {
   return rows.filter((c) => ['owned', 'owned-expiring', 'separate-agreement'].includes(capabilityEntitlement(c).status)).length;
 }
 
-// Capabilities that are BOTH owned AND overlap a third-party tool that could be
-// retired — the sharpest "you already pay for this" rows.
-export function retireCandidates(rows = CAPABILITIES) {
+// Distinct Salesforce entitlements Blackbaud owns, counted from the entitlement
+// source (OWNED_PRODUCTS) — the true "what you already own" number, independent
+// of how many capability rows map to each entitlement.
+export function entitlementsOwnedCount() {
+  return Object.keys(OWNED_PRODUCTS).length;
+}
+
+// Capabilities that are BOTH owned AND overlap a third-party tool Blackbaud also
+// runs — candidates to CONSOLIDATE the work onto the platform they already own
+// (reducing context-switching), NOT a claim that the tool should be retired.
+export function consolidationCandidates(rows = CAPABILITIES) {
   return rows.filter((c) => {
     const ent = capabilityEntitlement(c).status;
-    return ['owned', 'owned-expiring'].includes(ent) && Array.isArray(c.retires) && c.retires.length > 0;
+    return ['owned', 'owned-expiring'].includes(ent) && Array.isArray(c.overlaps) && c.overlaps.length > 0;
   });
 }
