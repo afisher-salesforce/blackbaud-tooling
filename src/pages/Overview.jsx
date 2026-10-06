@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layers, TrendingUp, RefreshCw, ArrowRight } from 'lucide-react';
+import { Layers, TrendingUp, RefreshCw, ArrowRight, BadgeCheck } from 'lucide-react';
 import DisclaimerBanner from '../components/DisclaimerBanner';
+import CollapsibleCard from '../components/CollapsibleCard';
 import HeatmapGrid from '../components/HeatmapGrid';
 import RoadmapTile from '../components/RoadmapTile';
-import AlignmentChip from '../components/AlignmentChip';
 import { CAPABILITIES, TOOL_COUNT, alignmentCounts, capabilitiesByStream, licensedCount, consolidationCandidates, entitlementsOwnedCount } from '../content/capabilities';
 import { ALIGNMENT_ORDER, alignmentMeta } from '../content/alignment';
 import { ENTITLEMENT_DISCLAIMER } from '../content/entitlements';
-import { BadgeCheck } from 'lucide-react';
 
 function Stat({ value, label }) {
   return (
-    <div className="metric-card text-center">
+    <div className="metric-card">
       <div className="hero-metric">{value}</div>
       <div className="text-[11px] uppercase tracking-wider text-th-faint mt-1">{label}</div>
     </div>
@@ -58,42 +57,52 @@ export default function Overview() {
         </div>
       </div>
 
-      <DisclaimerBanner />
+      {/* Framing banners — useful context, collapsed by default so the glance view leads. */}
+      <div className="space-y-3">
+        <CollapsibleCard
+          title="Read this first"
+          summary="These are talking points, not conclusions — a preliminary Salesforce view for discussion."
+          className="border-amber-500/25 bg-amber-500/10"
+          accent="text-amber-600 dark:text-amber-400"
+        >
+          <p className="text-sm leading-relaxed text-th-muted">{ENTITLEMENT_DISCLAIMER}</p>
+        </CollapsibleCard>
 
-      {/* "Start inward first" — the already-licensed story */}
-      <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-5">
-        <div className="flex items-start gap-3">
-          <div className="rounded-lg bg-emerald-500/15 p-2 shrink-0">
-            <BadgeCheck size={20} className="text-emerald-600 dark:text-emerald-400" />
-          </div>
-          <div>
-            <h2 className="text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-1">
-              Start inward first — build the platform you already own
-            </h2>
-            <p className="text-sm text-th-secondary leading-relaxed max-w-3xl">
-              Blackbaud already owns <strong>{entitlementsOwned}</strong> Salesforce entitlements, covering{' '}
-              <strong>{licensed}</strong> of the capabilities on this map — and <strong>{consolidationRows.length}</strong>{' '}
-              of those overlap a third-party tool Blackbaud also runs, so the work could be consolidated onto the
-              platform you already own and reduce context-switching across applications. Several active RFPs
-              (forecasting, CLM) are for capabilities Blackbaud already pays for. Filter the map to{' '}
-              <Link to="/map" className="font-medium underline" style={{ color: 'var(--bb-accent)' }}>
-                “Owned · overlaps a tool”
-              </Link>{' '}
-              to see them. Consolidation is a platform-strategy discussion, not a directive to retire tools —
-              contract terms and prior investment decide what actually moves.
-            </p>
-            <p className="text-[11px] text-th-faint mt-2 italic">{ENTITLEMENT_DISCLAIMER}</p>
-          </div>
-        </div>
+        <CollapsibleCard
+          title="Start inward first — build the platform you already own"
+          summary={`${entitlementsOwned} entitlements owned · ${licensed} capabilities covered · ${consolidationRows.length} overlap a tool you run.`}
+          className="border-emerald-500/30 bg-emerald-500/10"
+          accent="text-emerald-700 dark:text-emerald-300"
+          icon={<BadgeCheck size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0" />}
+        >
+          <p className="text-sm text-th-secondary leading-relaxed max-w-3xl">
+            Blackbaud already owns <strong>{entitlementsOwned}</strong> Salesforce entitlements, covering{' '}
+            <strong>{licensed}</strong> of the capabilities on this map — and <strong>{consolidationRows.length}</strong>{' '}
+            of those overlap a third-party tool Blackbaud also runs, so the work could be consolidated onto the
+            platform you already own and reduce context-switching across applications. Several active RFPs
+            (forecasting, CLM) are for capabilities Blackbaud already pays for. Filter the map to{' '}
+            <Link to="/map" className="font-medium underline" style={{ color: 'var(--bb-accent)' }}>
+              “Owned · overlaps a tool”
+            </Link>{' '}
+            to see them. Consolidation is a platform-strategy discussion, not a directive to retire tools —
+            contract terms and prior investment decide what actually moves.
+          </p>
+          <p className="text-[11px] text-th-faint mt-2 italic">{ENTITLEMENT_DISCLAIMER}</p>
+        </CollapsibleCard>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <Stat value={TOOL_COUNT} label="Tools in scope" />
-        <Stat value={CAPABILITIES.length} label="Capability areas assessed" />
-        <Stat value={entitlementsOwned} label="Salesforce entitlements owned" />
-        <Stat value={licensed} label="Capabilities already covered" />
-        <Stat value={consolidationRows.length} label="Overlap · consolidation candidates" />
+      {/* Alignment at a glance (heatmap) + the stat rail stacked to its right. */}
+      <div className="flex flex-col lg:flex-row gap-4 items-stretch">
+        <div className="min-w-0 lg:flex-1">
+          <HeatmapGrid />
+        </div>
+        <div className="flex flex-row flex-wrap lg:flex-col gap-3 lg:w-56 lg:shrink-0">
+          <Stat value={TOOL_COUNT} label="Tools in scope" />
+          <Stat value={CAPABILITIES.length} label="Capability areas assessed" />
+          <Stat value={entitlementsOwned} label="Salesforce entitlements owned" />
+          <Stat value={licensed} label="Capabilities already covered" />
+          <Stat value={consolidationRows.length} label="Overlap · consolidation candidates" />
+        </div>
       </div>
 
       {/* Alignment distribution */}
@@ -123,9 +132,6 @@ export default function Overview() {
           </p>
         </div>
       </div>
-
-      {/* Heatmap */}
-      <HeatmapGrid />
 
       {/* Value stream shortcuts */}
       <div className="grid md:grid-cols-2 gap-4">

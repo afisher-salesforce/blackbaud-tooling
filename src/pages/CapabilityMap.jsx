@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import CapabilityTable from '../components/CapabilityTable';
+import ToolingVenn from '../components/ToolingVenn';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 import NotesExport from '../components/NotesExport';
 import { CAPABILITIES, DOMAINS } from '../content/capabilities';
 
 export default function CapabilityMap() {
+  // The table owns the filter UI and reports its filtered rows up; the Venn
+  // recomputes from the same set so filtering the table reshapes it live.
+  const [filteredRows, setFilteredRows] = useState(CAPABILITIES);
+  const handleFiltered = useCallback((rows) => setFilteredRows(rows), []);
+
   return (
     <div className="max-w-6xl mx-auto space-y-5">
       <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -20,7 +26,9 @@ export default function CapabilityMap() {
 
       <DisclaimerBanner compact />
 
-      <CapabilityTable rows={CAPABILITIES} domains={DOMAINS} />
+      <ToolingVenn rows={filteredRows} />
+
+      <CapabilityTable rows={CAPABILITIES} domains={DOMAINS} onFilteredChange={handleFiltered} />
     </div>
   );
 }

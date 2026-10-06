@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, ChevronRight } from 'lucide-react';
 import AlignmentChip from './AlignmentChip';
@@ -22,7 +22,7 @@ import { capabilityEntitlement } from '../content/capabilities';
  *   lockStream — when set ('A2R'|'I2R'), hides the stream filter (used by the
  *                value-stream pages)
  */
-export default function CapabilityTable({ rows, domains, lockStream = null }) {
+export default function CapabilityTable({ rows, domains, lockStream = null, onFilteredChange = null }) {
   const navigate = useNavigate();
   const [stream, setStream] = useState('all');
   const [alignment, setAlignment] = useState('all');
@@ -54,6 +54,12 @@ export default function CapabilityTable({ rows, domains, lockStream = null }) {
         return ALIGNMENT_ORDER.indexOf(a.alignment) - ALIGNMENT_ORDER.indexOf(b.alignment);
       });
   }, [rows, stream, alignment, domain, licensed, q, lockStream]);
+
+  // Report the current filtered rows up so a sibling (e.g. the Venn) can react
+  // to the same filters without owning the filter UI.
+  useEffect(() => {
+    if (onFilteredChange) onFilteredChange(filtered);
+  }, [filtered, onFilteredChange]);
 
   return (
     <div className="section-card">
