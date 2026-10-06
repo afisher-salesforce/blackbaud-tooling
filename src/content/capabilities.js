@@ -1105,3 +1105,21 @@ export function consolidationCandidates(rows = CAPABILITIES) {
     return ['owned', 'owned-expiring'].includes(ent) && Array.isArray(c.overlaps) && c.overlaps.length > 0;
   });
 }
+
+// The set of alignment keys where Salesforce "covers" the capability — the same
+// definition the Capability Map's Venn uses for its "Salesforce covers" circle.
+const COVERED_ALIGNMENTS = new Set(['native', 'integrates', 'data360', 'partial']);
+
+// Distinct TOOLS Salesforce already overlaps — every tool on a capability row
+// whose alignment is native / integrates / Data 360 / partial. This is the
+// consolidation-surface headline (e.g. 65 of 86): the number the CIO's
+// 86-toward-the-60s rationalization target is measured against. Counted in tools
+// (deduped across rows) so it reconciles exactly with the Venn's "covers" count.
+export function toolsCoveredCount(rows = CAPABILITIES) {
+  const seen = new Set();
+  for (const c of rows) {
+    if (!COVERED_ALIGNMENTS.has(c.alignment)) continue;
+    for (const t of c.tools) seen.add(t);
+  }
+  return seen.size;
+}

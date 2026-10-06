@@ -33,16 +33,33 @@ export default function HeatmapGrid() {
       (a, b) => ALIGNMENT_ORDER.indexOf(a.alignment) - ALIGNMENT_ORDER.indexOf(b.alignment)
     );
     return (
-      <div className={`flex flex-wrap gap-1 p-1.5 rounded-md ${tint} min-h-[2.25rem] content-start`}>
+      // Dots spread across the (wide) lane: larger gap + px so the spatial
+      // relationship within a domain row reads clearly.
+      <div className={`flex flex-wrap gap-2 px-3 py-2 rounded-md ${tint} min-h-[2.25rem] content-start`}>
         {sorted.map((c) => {
           const meta = alignmentMeta(c.alignment);
           return (
-            <button
-              key={c.id}
-              onClick={() => navigate(`/capability/${c.id}`)}
-              className={`w-3 h-3 rounded-full ${meta.dot} ring-1 ring-black/5 hover:scale-125 transition-transform`}
-              title={`${c.subCapability} — ${meta.label} (${c.tools.join(', ')})`}
-            />
+            <div key={c.id} className="relative group/dot">
+              <button
+                onClick={() => navigate(`/capability/${c.id}`)}
+                aria-label={`${c.subCapability} — ${meta.label}`}
+                className={`w-3.5 h-3.5 rounded-full ${meta.dot} ring-1 ring-black/5 hover:scale-125 transition-transform`}
+              />
+              {/* Instant styled tooltip (replaces the laggy native title). */}
+              <div
+                role="tooltip"
+                className="pointer-events-none absolute left-1/2 bottom-full z-20 mb-1.5 hidden w-max max-w-[220px] -translate-x-1/2 group-hover/dot:block"
+              >
+                <div className="rounded-md border border-surface-border bg-surface-card px-2.5 py-1.5 text-left shadow-lg">
+                  <div className="text-[11px] font-semibold text-th-primary leading-snug">{c.subCapability}</div>
+                  <div className="mt-0.5 flex items-center gap-1.5">
+                    <span className={`w-2 h-2 rounded-full ${meta.dot}`} />
+                    <span className="text-[10px] font-medium text-th-secondary">{meta.label}</span>
+                  </div>
+                  <div className="mt-0.5 text-[10px] text-th-muted leading-snug">{c.tools.join(', ')}</div>
+                </div>
+              </div>
+            </div>
           );
         })}
       </div>
@@ -60,16 +77,20 @@ export default function HeatmapGrid() {
           </p>
         </div>
       </div>
-      <div className="section-card-body overflow-x-auto">
+      {/* No overflow clipping here: an overflow-x container would also clip the
+          dot tooltips vertically (CSS forces overflow-y:auto alongside x:auto).
+          The inner min-width lets the page scroll horizontally on narrow screens. */}
+      <div className="section-card-body">
         {/* Width-capped so the matrix stays legible rather than spanning the full page. */}
         <div className="min-w-[560px] max-w-3xl">
-          {/* Column headers — persistent lane labels so stream→dot mapping is unambiguous. */}
+          {/* Column headers — persistent lane labels, left-aligned over their dot
+              lanes (px-3 matches the cell padding so the label sits over the dots). */}
           <div className="grid grid-cols-[200px_1fr_1fr] gap-2 mb-2">
             <div />
-            <div className="rounded-md bg-surface-card-hover/60 py-1 text-center text-[11px] font-bold uppercase tracking-wider text-th-faint">
+            <div className="rounded-md bg-surface-card-hover/60 px-3 py-1 text-left text-[11px] font-bold uppercase tracking-wider text-th-faint">
               Awareness → Revenue
             </div>
-            <div className="rounded-md bg-[var(--bb-accent)]/5 py-1 text-center text-[11px] font-bold uppercase tracking-wider text-th-faint">
+            <div className="rounded-md bg-[var(--bb-accent)]/5 px-3 py-1 text-left text-[11px] font-bold uppercase tracking-wider text-th-faint">
               Implement → Renew
             </div>
           </div>

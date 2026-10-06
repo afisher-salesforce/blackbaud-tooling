@@ -5,7 +5,7 @@ import DisclaimerBanner from '../components/DisclaimerBanner';
 import CollapsibleCard from '../components/CollapsibleCard';
 import HeatmapGrid from '../components/HeatmapGrid';
 import RoadmapTile from '../components/RoadmapTile';
-import { CAPABILITIES, TOOL_COUNT, alignmentCounts, capabilitiesByStream, licensedCount, consolidationCandidates, entitlementsOwnedCount } from '../content/capabilities';
+import { CAPABILITIES, TOOL_COUNT, alignmentCounts, capabilitiesByStream, licensedCount, consolidationCandidates, entitlementsOwnedCount, toolsCoveredCount } from '../content/capabilities';
 import { ALIGNMENT_ORDER, alignmentMeta } from '../content/alignment';
 import { ENTITLEMENT_DISCLAIMER } from '../content/entitlements';
 
@@ -25,6 +25,7 @@ export default function Overview() {
   const licensed = licensedCount();
   const entitlementsOwned = entitlementsOwnedCount();
   const consolidationRows = consolidationCandidates();
+  const toolsCovered = toolsCoveredCount();
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -41,7 +42,9 @@ export default function Overview() {
         </h1>
         <p className="text-sm text-th-muted leading-relaxed max-w-3xl mb-4">
           Blackbaud operates <strong className="text-th-secondary">{TOOL_COUNT} tools</strong> across the
-          Awareness-to-Revenue and Implement-to-Renew value streams. This canvas maps each capability against the
+          Awareness-to-Revenue and Implement-to-Renew value streams — and Salesforce already overlaps{' '}
+          <strong className="text-th-secondary">{toolsCovered} of them</strong>, the consolidation surface for taking
+          the inventory from {TOOL_COUNT} toward a smaller number. This canvas maps each capability against the
           Salesforce platform Blackbaud already invests in — not to declare winners, but to give Enterprise
           Architecture and the Value Stream Leads a structured place to react, correct, and decide what to explore.
           The anchor question throughout: <em className="text-th-secondary">which of these do you already own?</em>
@@ -98,6 +101,7 @@ export default function Overview() {
         </div>
         <div className="flex flex-row flex-wrap lg:flex-col gap-3 lg:w-56 lg:shrink-0">
           <Stat value={TOOL_COUNT} label="Tools in scope" />
+          <Stat value={toolsCovered} label="Tools Salesforce overlaps" />
           <Stat value={CAPABILITIES.length} label="Capability areas assessed" />
           <Stat value={entitlementsOwned} label="Salesforce entitlements owned" />
           <Stat value={licensed} label="Capabilities already covered" />
