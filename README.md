@@ -8,6 +8,10 @@ Value Stream Leads** — a structured place to react to, correct, and decide wha
 It is a static React/Vite SPA served by a small Express BFF (same architecture as the Siemens DISW Knowledge site),
 hosted on Heroku in a Private Space.
 
+> **SE building something like this for another account?** Start with **[`docs/PLAYBOOK.md`](docs/PLAYBOOK.md)** —
+> the end-to-end recipe: the opening prompt, the grounding files to gather, the decisions and why, the phase-by-phase
+> build, Heroku + GitHub + config-var hygiene, and the gotchas that cost time the first time.
+
 ## What it does
 
 - **Capability map** — every capability against a **6-way alignment** placement: Native · Integrates · Data 360 ·
