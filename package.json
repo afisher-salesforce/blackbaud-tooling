@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "start": "node server.js",
     "refresh:trailhead": "node scripts/refresh-trailhead.js",
+    "build:standalone": "node scripts/build-standalone-html.mjs",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
