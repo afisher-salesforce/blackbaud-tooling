@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutGrid, Table2, TrendingUp, RefreshCw, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutGrid, Table2, Workflow, TrendingUp, RefreshCw, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const NAV_ITEMS = [
   { to: '/overview', label: 'Overview', icon: LayoutGrid },
   { to: '/map', label: 'Capability Map', icon: Table2 },
+  { to: '/lifecycle', label: 'Lifecycle Map', icon: Workflow },
   { to: '/a2r', label: 'Awareness → Revenue', icon: TrendingUp },
   { to: '/i2r', label: 'Implement → Renew', icon: RefreshCw },
 ];

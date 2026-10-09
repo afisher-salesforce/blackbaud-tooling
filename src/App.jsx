@@ -7,6 +7,7 @@ import Overview from './pages/Overview';
 import CapabilityMap from './pages/CapabilityMap';
 import CapabilityDetail from './pages/CapabilityDetail';
 import ValueStream from './pages/ValueStream';
+import Lifecycle from './pages/Lifecycle';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/" element={<Navigate to="/overview" replace />} />
           <Route path="/overview" element={<Overview />} />
           <Route path="/map" element={<CapabilityMap />} />
+          <Route path="/lifecycle" element={<Lifecycle />} />
           <Route path="/capability/:id" element={<CapabilityDetail />} />
           <Route path="/a2r" element={<ValueStream stream="A2R" />} />
           <Route path="/i2r" element={<ValueStream stream="I2R" />} />
