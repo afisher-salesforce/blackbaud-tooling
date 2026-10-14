@@ -22,3 +22,6 @@ npm-debug.log*
 *.swp
 .vscode/
 .idea/
+
+# Prior Claude session transcripts (may contain secrets) — never commit
+docs/prior-sessions/
