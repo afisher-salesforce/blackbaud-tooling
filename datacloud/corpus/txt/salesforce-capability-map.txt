@@ -18,7 +18,6 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Alignment: **Native** — Salesforce delivers this capability out-of-the-box on licenses Blackbaud already owns or can light up.
 - Salesforce products: Collaborative Forecasting, Pipeline Inspection, Territory Management, Agentforce for Sales
 - Entitlement: owned
-- Could retire: Clari
 - Salesforce SE view: This is the live one: Blackbaud is running a forecasting RFP (Clari / Gong Forecast) for a capability it ALREADY owns — Collaborative Forecasting + Territory Management are included in Sales & Service Cloud Unlimited, and Agentforce for Sales (owned) adds conversational access to the forecast. the saving is meaningful because the capability is already owned. This is an IMPLEMENTATION play, not a procurement play. The one parity item to validate live: forward-looking conversion analytics (not just current-quarter rollup).
 
 ### Conversation Intelligence (A2R)
@@ -26,8 +25,7 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Alignment: **Partial** — Salesforce covers some of the jobs-to-be-done but not all; a reduced-scope consolidation or a hybrid is the realistic story.
 - Salesforce products: Customer Experience Intelligence (CXI), Einstein Conversation Insights
 - Entitlement: owned
-- Could retire: Gong
-- Salesforce SE view: Important entitlement note: Blackbaud ALREADY owns Customer Experience Intelligence (Unlimited) — the conversation-intelligence capability that overlaps Gong is a paid, active entitlement, not a net-new buy. Still Partial on the business side: the prep call flagged that unwinding Gong is NOT a clean swap — it is woven into the sales process across Sales, Marketing and CS. So the honest message is "you already own the replacement capability; whether/when to retire Gong is a sales-process conversation, not a licensing one."
+- Salesforce SE view: Important entitlement note: Blackbaud ALREADY owns Customer Experience Intelligence (Unlimited) — the conversation-intelligence capability that overlaps Gong is a paid, active entitlement, not a net-new buy. Still Partial on the business side: the prep call flagged that unwinding Gong is NOT a clean swap — it is woven into the sales process across Sales, Marketing and CS. So the honest message is "you already own an overlapping capability; whether/when to consolidate onto it is a sales-process conversation, not a licensing one."
 
 ### Marketing Attribution (A2R)
 - Tools in use: Marketo Measure (Bizible)
@@ -36,7 +34,7 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Entitlement: not-licensed
 - Salesforce SE view: Partial. Multi-touch attribution modeling is a genuine strength of Marketo Measure; Salesforce can land campaign influence + revenue attribution natively, but parity on the attribution modeling depends on the marketing-automation decision (see Marketo) and how much is already in Data 360.
 
-### Sales Engagement / Dialer (A2R)
+### Outbound Calling & Sales Cadence (A2R)
 - Tools in use: Nooks
 - Alignment: **Native** — Salesforce delivers this capability out-of-the-box on licenses Blackbaud already owns or can light up.
 - Salesforce products: Sales Engagement, Sales Dialer
@@ -49,7 +47,7 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Tools in use: Marketo (Engage)
 - Alignment: **Discuss** — Needs Blackbaud input before we can place it — depends on how the tool is actually used, integrated, or valued internally.
 - Salesforce products: Marketing Cloud Account Engagement, Marketing Cloud Growth / Advanced
-- Entitlement: na
+- Entitlement: owned-expiring (expires Dec 2026)
 - Salesforce SE view: Flagged Discuss, not Covered. The prep call was explicit: Blackbaud doesn’t love Marketo, but Marketing Cloud is NOT a clean replacement — it lacks the identity/personalization connection they need and would require web work to bridge. This is the weakest consolidation story today; raise it as discovery, not a recommendation.
 
 ### ABM Orchestration (A2R)
@@ -220,15 +218,14 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Alignment: **Native** — Salesforce delivers this capability out-of-the-box on licenses Blackbaud already owns or can light up.
 - Salesforce products: Agentforce, Agent Builder
 - Entitlement: owned
-- Could retire: CoPilot Studio
 - Salesforce SE view: Native AND owned: Agentforce for Sales (750) and for Service (550) are active entitlements. CoPilot Studio rides the Microsoft EA; Agentforce is the owned, Salesforce-native equivalent that grounds in the CRM data and honors the permission model. The Agentforce Coworker pilot is already in the org and can be enabled by permission (Teams embedding targeted ~Oct). This is also the hook for the future Headless 360 / Aiforce roadmap tile on this site.
 
 ### iPaaS / Integration (A2R)
 - Tools in use: Zapier
 - Alignment: **Native** — Salesforce delivers this capability out-of-the-box on licenses Blackbaud already owns or can light up.
-- Salesforce products: MuleSoft (Anypoint / Composer), Flow Integration
-- Entitlement: not-licensed
-- Salesforce SE view: Native at the enterprise tier (MuleSoft). The honest nuance: Zapier’s long-tail SMB connector breadth is different from MuleSoft’s enterprise integration — for lightweight marketing automations, Flow/Composer fit; for the breadth of ad-hoc Zaps, confirm scope.
+- Salesforce products: MuleSoft Anypoint Platform (Platinum), Flow Integration
+- Entitlement: owned
+- Salesforce SE view: Native at the enterprise tier, and now owned: a MuleSoft Anypoint Platform — Platinum Edition order (26-month term, executed Oct 2026) adds the core platform plus integration-runtime capacity (base subscription, production & pre-production vCores, Anypoint MQ 500M requests, Flex Gateway 1M API calls), on top of the existing Dataloader.io Enterprise. The enterprise-integration execution layer is therefore licensed — this is no longer a data-loader-only entitlement. Two scope caveats to keep honest: the order does NOT include dedicated API Manager / API Governance SKUs (the full API-management suite remains an expansion area), nor premium enterprise connectors. Zapier’s long-tail SMB connector breadth is also different from MuleSoft’s enterprise integration — for lightweight automations Flow/Composer fit; confirm scope before any consolidation.
 
 ### Workflow Automation (inline grid) (A2R)
 - Tools in use: Gridmate
@@ -307,7 +304,6 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Alignment: **Native** — Salesforce delivers this capability out-of-the-box on licenses Blackbaud already owns or can light up.
 - Salesforce products: Revenue Cloud Advanced, Agentforce Revenue Management (ARM), CPQ Plus (legacy)
 - Entitlement: owned
-- Could retire: SteelBrick CPQ, PSQuote
 - Salesforce SE view: The sharpest entitlement finding on the whole map: Blackbaud is paying for BOTH the legacy CPQ Plus (SteelBrick) AND its replacement, Revenue Cloud Advanced (the "CPQ Upgrade"), simultaneously — the migration stalled, so the old and new sit side by side on the entitlement. Restarting that migration is a Professional Services engagement, not a licensing question. Crucially it is NOT a standalone CPQ swap: configure-price-quote is inseparable from opportunity management (new-logo deals the sales team runs) and from renewals (which Customer Success runs) — so a Revenue Cloud deployment is really a sales-and-renewal PROCESS change. Pairing it with CLM and Agentforce Revenue Management (ARM) is the right shape: ARM unlocks product-catalog, pricing and bundling, all API-enabled unlike CPQ. (OSF is the likely implementation partner.)
 
 ## PSA / Services ERP
@@ -334,7 +330,7 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Alignment: **Integrates** — Salesforce does not replace the tool, but surfaces it inside the platform (packaged app / API) so the work happens in one place.
 - Salesforce products: Service Cloud Voice (Partner Contact Center + Amazon Connect), Omni-Channel
 - Entitlement: owned
-- Salesforce SE view: Entitlement note: Blackbaud already owns Partner Contact Center with Amazon Connect (Unlimited, 420) — so Service Cloud Voice is a paid entitlement, not a net-new buy. Integrates is still the precise placement: it brings Amazon Connect (and partner telephony) INTO the console — you keep the carrier and unify it in Service Cloud. Deliberately NOT marking Five9 as a retire candidate: the prep call left open whether Amazon Connect is a direct AWS relationship or runs through a voice partner, and Five9 may BE the carrier rather than a tool to replace. That carrier question is the thing to resolve before any consolidation claim — hence a discussion, not a retire. Noise cancellation (Krisp) is out of scope for Salesforce.
+- Salesforce SE view: Entitlement note: Blackbaud already owns Partner Contact Center with Amazon Connect (Unlimited, 420) — so Service Cloud Voice is a paid entitlement, not a net-new buy. Integrates is still the precise placement: it brings Amazon Connect (and partner telephony) INTO the console — you keep the carrier and unify it in Service Cloud. Deliberately NOT marking Five9 as a retire candidate: the prep call left open whether Amazon Connect is a direct AWS relationship or runs through a voice partner, and Five9 may BE the carrier rather than an overlapping tool. That carrier question is the thing to resolve before any consolidation claim — hence a discussion. Noise cancellation (Krisp) is out of scope for Salesforce.
 
 ### WFM Scheduling & Forecasting (I2R)
 - Tools in use: Playvox
@@ -364,7 +360,6 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Alignment: **Native** — Salesforce delivers this capability out-of-the-box on licenses Blackbaud already owns or can light up.
 - Salesforce products: Tableau Next, Tableau, Data 360
 - Entitlement: owned-expiring (expires ~Jan 2027)
-- Could retire: Qlik
 - Salesforce SE view: Native for renewal reporting on CRM data. Entitlement nuance: CRM Analytics is NOT separately licensed (no Plus SKU found), but Tableau Next now covers this natively within the Data 360 context — and Tableau (owned) expires ~Jan 2027. Qlik is often an enterprise BI standard spanning non-CRM data — confirm whether it is renewal-specific (Tableau Next fits) or the enterprise BI platform (a broader standalone-Tableau-vs-Qlik decision).
 
 ### Product Ideas / Idea Bank (I2R)
@@ -390,7 +385,7 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Entitlement: not-licensed
 - Salesforce SE view: Partial. Experience Cloud can build onboarding/customer hubs; EverAfter’s pre-built CS-collaboration-portal templates and ease-of-standup are its differentiator. Buildable natively, but confirm the lift vs. EverAfter’s turnkey model.
 
-### Partner Relationship Management (I2R)
+### Partner Portal & Deal Registration (I2R)
 - Tools in use: Zift (Partner Portal)
 - Alignment: **Native** — Salesforce delivers this capability out-of-the-box on licenses Blackbaud already owns or can light up.
 - Salesforce products: Partner Relationship Management (Experience Cloud)
@@ -437,7 +432,7 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 ### Sales Commission (I2R)
 - Tools in use: Xactly
 - Alignment: **Native** — Salesforce delivers this capability out-of-the-box on licenses Blackbaud already owns or can light up.
-- Salesforce products: Spiff (Incentive Compensation Management)
+- Salesforce products: Salesforce Spiff (Sales Performance Management)
 - Entitlement: not-licensed
 - Salesforce SE view: Native via Spiff / Incentive Compensation Management — product naming is transitional ("Spiff" → Incentive Compensation Management), say both. Honest nuance: Xactly is an enterprise-grade ICM incumbent; parity for complex comp plans should be validated, but this is a legitimate native play.
 
@@ -454,6 +449,6 @@ How Salesforce aligns to each capability in Blackbaud's inventory, on the six-wa
 - Tools in use: OneTrust
 - Alignment: **Partial** — Salesforce covers some of the jobs-to-be-done but not all; a reduced-scope consolidation or a hybrid is the realistic story.
 - Salesforce products: Privacy Center, Data 360 Consent Management
-- Entitlement: not-licensed
+- Entitlement: owned
 - Salesforce SE view: Partial, not Covered. Privacy Center + Data 360 consent cover Salesforce-resident data retention/RTBF/consent well; OneTrust is an enterprise-wide privacy/consent GRC platform spanning far beyond Salesforce. Native covers the Salesforce footprint; OneTrust stays as the enterprise system. Important to be precise here given the health-data sensitivity the Claudeforce call flagged.
 

@@ -105,8 +105,10 @@ async function main() {
       Products__c: info.products.join('; '),
       Status__c: info.status,
       Expiry__c: info.expiry || null,
-      As_Of__c: ENTITLEMENT_AS_OF,
-      Source__c: 'Asset line items, Charleston org 00130000016hsaj',
+      // Per-entitlement provenance override (e.g. the MuleSoft order), else the
+      // shared Charleston asset-line-items snapshot.
+      As_Of__c: info.asOf || ENTITLEMENT_AS_OF,
+      Source__c: info.source || 'Asset line items, Charleston org 00130000016hsaj',
     }, mkRef('ent', key))
   );
   const entRes = await compositeUpsert(auth, entReqs);

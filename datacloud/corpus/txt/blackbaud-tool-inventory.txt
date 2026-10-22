@@ -6,10 +6,10 @@ Blackbaud's application inventory across the Awareness-to-Revenue (A2R) and Impl
 
 - **Blackbaud Salesforce** — serves CRM & Core Platform / CRM System of Record. Salesforce alignment: Native.
 - **JG Salesforce** — serves CRM & Core Platform / CRM System of Record. Salesforce alignment: Native.
-- **Clari** — serves Revenue Intelligence / Forecasting & Pipeline. Salesforce alignment: Native. Candidate to retire by activating owned Salesforce capability.
-- **Gong** — serves Revenue Intelligence / Conversation Intelligence. Salesforce alignment: Partial. Candidate to retire by activating owned Salesforce capability.
+- **Clari** — serves Revenue Intelligence / Forecasting & Pipeline. Salesforce alignment: Native.
+- **Gong** — serves Revenue Intelligence / Conversation Intelligence. Salesforce alignment: Partial.
 - **Marketo Measure (Bizible)** — serves Revenue Intelligence / Marketing Attribution. Salesforce alignment: Partial.
-- **Nooks** — serves Revenue Intelligence / Sales Engagement / Dialer. Salesforce alignment: Native.
+- **Nooks** — serves Revenue Intelligence / Outbound Calling & Sales Cadence. Salesforce alignment: Native.
 - **Marketo (Engage)** — serves Marketing Automation / Marketing Automation Platform. Salesforce alignment: Discuss.
 - **Demandbase** — serves Marketing Automation / ABM Orchestration. Salesforce alignment: Partial.
 - **Qualified** — serves Marketing Automation / Website Chat / Conversational. Salesforce alignment: Native.
@@ -47,7 +47,7 @@ Blackbaud's application inventory across the Awareness-to-Revenue (A2R) and Impl
 - **Swoogo** — serves Events & Field / Event Management. Salesforce alignment: Partial.
 - **iCapture** — serves Events & Field / Event Lead Capture. Salesforce alignment: Partial.
 - **Postal** — serves Events & Field / Direct Mail / Gifting. Salesforce alignment: Gap.
-- **CoPilot Studio** — serves Automation & Workflow / AI Agent / Chatbot Builder. Salesforce alignment: Native. Candidate to retire by activating owned Salesforce capability.
+- **CoPilot Studio** — serves Automation & Workflow / AI Agent / Chatbot Builder. Salesforce alignment: Native.
 - **Zapier** — serves Automation & Workflow / iPaaS / Integration. Salesforce alignment: Native.
 - **Gridmate** — serves Automation & Workflow / Workflow Automation (inline grid). Salesforce alignment: Native.
 - **Asana** — serves Automation & Workflow / Project / Work Mgmt. Salesforce alignment: Gap.
@@ -64,7 +64,7 @@ Blackbaud's application inventory across the Awareness-to-Revenue (A2R) and Impl
 - **Software Advice** — serves Review & Peer Sites / Review / Peer Listing. Salesforce alignment: Gap.
 - **Prodly** — serves DevOps / SF Release Mgmt / Salesforce Release / DevOps. Salesforce alignment: Partial.
 - **Gainsight** — serves Customer Success / Customer Health / Retention. Salesforce alignment: Partial.
-- **PSQuote** — serves CPQ / Quoting / Configure-Price-Quote & Revenue Lifecycle. Salesforce alignment: Native. Candidate to retire by activating owned Salesforce capability.
+- **PSQuote** — serves CPQ / Quoting / Configure-Price-Quote & Revenue Lifecycle. Salesforce alignment: Native.
 - **Certinia (FinancialForce)** — serves PSA / Services ERP / PSA / Services Financials. Salesforce alignment: Gap.
 - **Coveo for Salesforce** — serves Search & Relevance / Enterprise Search / Relevance. Salesforce alignment: Partial.
 
@@ -78,11 +78,11 @@ Blackbaud's application inventory across the Awareness-to-Revenue (A2R) and Impl
 - **Opsgenie** — serves Support / Incident Alerting · Customer Status Page. Salesforce alignment: Partial.
 - **Status.IO** — serves Support / Incident Alerting · Customer Status Page. Salesforce alignment: Partial.
 - **Staircase AI** — serves Customer Intelligence / Churn Risk Analysis. Salesforce alignment: Partial.
-- **Qlik** — serves Customer Intelligence / Renewal Reporting & Analytics. Salesforce alignment: Native. Candidate to retire by activating owned Salesforce capability.
+- **Qlik** — serves Customer Intelligence / Renewal Reporting & Analytics. Salesforce alignment: Native.
 - **Aha!** — serves Customer Intelligence / Product Ideas / Idea Bank. Salesforce alignment: Partial.
 - **MixPanel / Heap** — serves Customer Intelligence / Product Analytics. Salesforce alignment: Data 360.
 - **EverAfter** — serves Digital Customer Experience / Customer Onboarding / Adoption Portals. Salesforce alignment: Partial.
-- **Zift (Partner Portal)** — serves Digital Customer Experience / Partner Relationship Management. Salesforce alignment: Native.
+- **Zift (Partner Portal)** — serves Digital Customer Experience / Partner Portal & Deal Registration. Salesforce alignment: Native.
 - **Calendly** — serves Digital Customer Experience / Meeting Scheduling (CS). Salesforce alignment: Native.
 - **Docebo** — serves Internal Enablement / LMS / Training · Course Authoring. Salesforce alignment: Partial.
 - **Articulate** — serves Internal Enablement / LMS / Training · Course Authoring. Salesforce alignment: Partial.

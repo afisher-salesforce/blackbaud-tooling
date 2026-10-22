@@ -50,6 +50,11 @@ Point-in-time read of Blackbaud's active Salesforce entitlements as of 4 Oct 202
 - Status: Licensed (active)
 - Products / line items: MuleSoft – Dataloader.io Enterprise
 
+## anypoint-platform
+- Status: Licensed (active)
+- Products / line items: MuleSoft Anypoint Platform – Platinum Edition (base subscription); Production & pre-production vCore capacity; Anypoint MQ (500M API requests); Anypoint Flex Gateway (1M API calls × 100)
+- As of: 15 Oct 2026 — source: MuleSoft Anypoint order (26-month term), opportunity close 15 Oct 2026
+
 ## shield
 - Status: Licensed (active)
 - Products / line items: Salesforce Shield (LP1); Sandbox (Full Copy)

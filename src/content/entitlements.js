@@ -164,6 +164,12 @@ export const OWNED_PRODUCTS = {
     // API Manager / API Governance SKUs or premium enterprise connectors.
     status: 'owned',
     expiry: null,
+    // Per-entitlement provenance override: this came from a separate MuleSoft order,
+    // not the Charleston asset-line-items snapshot, so it carries its own as-of
+    // (the opportunity close date) and source. Other entitlements fall back to the
+    // shared ENTITLEMENT_AS_OF / Charleston source in the scripts.
+    asOf: '15 Oct 2026',
+    source: 'MuleSoft Anypoint order (26-month term), opportunity close 15 Oct 2026',
   },
   shield: {
     products: ['Salesforce Shield (LP1)', 'Sandbox (Full Copy)'],

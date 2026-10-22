@@ -77,7 +77,11 @@ function entitlements() {
   for (const [key, info] of Object.entries(OWNED_PRODUCTS)) {
     md += `## ${key}\n`;
     md += `- Status: ${STATUS[info.status] || info.status}${info.expiry ? ` (term ends ${info.expiry})` : ''}\n`;
-    md += `- Products / line items: ${info.products.join('; ')}\n\n`;
+    md += `- Products / line items: ${info.products.join('; ')}\n`;
+    // Per-entitlement provenance override (e.g. the MuleSoft order) when it differs
+    // from the shared Charleston snapshot used in the header above.
+    if (info.asOf) md += `- As of: ${info.asOf}${info.source ? ` — source: ${info.source}` : ''}\n`;
+    md += `\n`;
   }
   return md;
 }
