@@ -36,9 +36,17 @@ streams) against Salesforce capabilities and what Blackbaud **already owns**.
 
 ## Canonical numbers (must reconcile everywhere)
 
-86 tools · 59 capability areas (BB rows, *not* SF capabilities) · 13 SF entitlements owned · 12 capabilities already
+86 tools · 59 capability areas (BB rows, *not* SF capabilities) · 14 SF entitlements owned · 12 capabilities already
 covered · **65 tools Salesforce overlaps** (native+integrates+data360+**partial**) · 5 consolidation candidates
 (Clari, Gong, CoPilot Studio, SteelBrick CPQ, Qlik — Qlik/Tableau expiring ~Jan 2027). A2R 42 + I2R 17 = 59.
+Entitlements went 13→14 on 2026-10 when Blackbaud executed a **MuleSoft Anypoint Platform – Platinum Edition** order
+(26-month term; base subscription + prod/pre-prod vCores + Anypoint MQ 500M + Flex Gateway 1M×100). It licenses the
+integration-runtime layer but NOT dedicated API Manager / API Governance SKUs or premium connectors — so `ipaas-integration`
+now points at the new `anypoint-platform` entitlement (not `mulesoft-dataloader`, which remains a distinct owned entitlement).
+Capability-level tallies (licensed 12 / covered 65) are unchanged — only the raw entitlement count moved. `entitlementCount()`
+is defined but unused in the UI, so no page renders the total. The downstream Downloads matrix
+(`~/Downloads/blackbaud-capabilities-summary.html`, the separate 75-cap/10-domain SF taxonomy file) flipped Integration's
+`IEI` to Separate Agreement (licensed 65→66, 88%); `IAM` stays a gap (no API Manager SKU on the order).
 Lifecycle map: 20 caps (16 native + 3 integrates + 1 data360); of 16 native, 7 licensed / 9 not.
 SteelBrick CPQ sits in `overlaps`, not `tools`, so the count stays 86.
 

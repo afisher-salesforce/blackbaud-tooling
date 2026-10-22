@@ -534,12 +534,12 @@ export const CAPABILITIES = [
     tools: ['Zapier'],
     primaryUsers: 'Marketing / Operations',
     alignment: 'native',
-    sfProducts: ['MuleSoft (Anypoint / Composer)', 'Flow Integration'],
-    ownedKey: 'mulesoft-dataloader',
+    sfProducts: ['MuleSoft Anypoint Platform (Platinum)', 'Flow Integration'],
+    ownedKey: 'anypoint-platform',
     draftNote:
       'Christa: Covered — MuleSoft + Flow Integration provide enterprise iPaaS and API connectivity.',
     seReview:
-      'Native at the enterprise tier (MuleSoft) — but entitlement nuance: Blackbaud owns only MuleSoft Dataloader.io today, NOT the full Anypoint Platform / API management. So the capability is owned at the data-loader tier; broader iPaaS/API-management would be an expansion. Zapier’s long-tail SMB connector breadth is also different from MuleSoft’s enterprise integration — for lightweight automations Flow/Composer fit; confirm scope before any consolidation.',
+      'Native at the enterprise tier, and now owned: a MuleSoft Anypoint Platform — Platinum Edition order (26-month term, executed Oct 2026) adds the core platform plus integration-runtime capacity (base subscription, production & pre-production vCores, Anypoint MQ 500M requests, Flex Gateway 1M API calls), on top of the existing Dataloader.io Enterprise. The enterprise-integration execution layer is therefore licensed — this is no longer a data-loader-only entitlement. Two scope caveats to keep honest: the order does NOT include dedicated API Manager / API Governance SKUs (the full API-management suite remains an expansion area), nor premium enterprise connectors. Zapier’s long-tail SMB connector breadth is also different from MuleSoft’s enterprise integration — for lightweight automations Flow/Composer fit; confirm scope before any consolidation.',
     trailheadSlug: 'mulesoft',
     discussionPrompts: ['Is Zapier doing enterprise integration or long-tail "glue" automations? MuleSoft fits the former cleanly.'],
   },

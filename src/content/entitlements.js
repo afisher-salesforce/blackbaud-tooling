@@ -152,6 +152,19 @@ export const OWNED_PRODUCTS = {
     status: 'owned',
     expiry: null,
   },
+  'anypoint-platform': {
+    products: [
+      'MuleSoft Anypoint Platform – Platinum Edition (base subscription)',
+      'Production & pre-production vCore capacity',
+      'Anypoint MQ (500M API requests)',
+      'Anypoint Flex Gateway (1M API calls × 100)',
+    ],
+    // Executed Oct 2026, 26-month term, separate MuleSoft order (distinct from the core SF agreement).
+    // Licenses the core platform + integration-runtime capacity; does NOT include dedicated
+    // API Manager / API Governance SKUs or premium enterprise connectors.
+    status: 'owned',
+    expiry: null,
+  },
   shield: {
     products: ['Salesforce Shield (LP1)', 'Sandbox (Full Copy)'],
     status: 'owned',
