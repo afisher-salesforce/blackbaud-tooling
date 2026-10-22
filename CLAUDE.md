@@ -72,7 +72,14 @@ SteelBrick CPQ sits in `overlaps`, not `tools`, so the count stays 86.
   blackbaud-tooling` / `heroku logs`.
 - Config vars: `SF_CLIENT_ID`, `SF_CLIENT_SECRET`, `SF_INSTANCE_URL` (My Domain), `SF_AGENT_ID=0XxgK000002OdIPSA0`,
   `ALLOW_WRITES=true`, `DATABASE_URL`. Secrets live only in Heroku / local `.env`. `server.js` `.trim()`s all env vars.
-- Salesforce **Tech IDO demo org** `trailsignup-f1af94b9143a4a` (synthetic reference data, not customer prod).
+- Salesforce **Tech IDO demo org** — My Domain `trailsignup-f1af94b9143a4a.my.salesforce.com` (synthetic reference
+  data, not customer prod). ⚠️ The My-Domain string is **not** a working CLI target. In the CLI this org is
+  authenticated as username `trailsignup.f1af94b9143a4a@salesforce.com`, auto-alias
+  `salesforce-blackbaud-forecast-management-wqjpck` (shared with the Jul 2026 Blackbaud forecasting demo). Recommend
+  pinning a stable alias: `sf alias set bb-ido=trailsignup.f1af94b9143a4a@salesforce.com`, then
+  `node scripts/seed-salesforce.mjs bb-ido`. **Do NOT seed into `disw-demo` (`trailsignup.9652d071a17833`)** — that is a
+  different org with no `BB_*` schema; upserts there fail with `NOT_FOUND`. Confirm the target before seeding:
+  `sf sobject describe --sobject BB_Entitlement__c --target-org bb-ido` should return field metadata.
 
 ## Rationalization Agent (Phase 2a + 2b — live)
 
