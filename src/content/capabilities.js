@@ -114,7 +114,7 @@ export const CAPABILITIES = [
     id: 'sales-engagement-dialer',
     valueStream: 'A2R',
     domain: 'Revenue Intelligence',
-    subCapability: 'Sales Engagement / Dialer',
+    subCapability: 'Outbound Calling & Sales Cadence',
     tools: ['Nooks'],
     primaryUsers: 'Sales / Revenue',
     alignment: 'native',
@@ -899,7 +899,7 @@ export const CAPABILITIES = [
     id: 'prm-partner-portal',
     valueStream: 'I2R',
     domain: 'Digital Customer Experience',
-    subCapability: 'Partner Relationship Management',
+    subCapability: 'Partner Portal & Deal Registration',
     tools: ['Zift (Partner Portal)'],
     primaryUsers: 'Partner Programs',
     alignment: 'native',
@@ -999,7 +999,7 @@ export const CAPABILITIES = [
     tools: ['Xactly'],
     primaryUsers: 'Sales Operations',
     alignment: 'native',
-    sfProducts: ['Spiff (Incentive Compensation Management)'],
+    sfProducts: ['Salesforce Spiff (Sales Performance Management)'],
     draftNote:
       'Christa: Covered — Salesforce Spiff (Incentive Compensation Management): real-time commission calculation and rep visibility.',
     seReview:

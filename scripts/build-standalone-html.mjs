@@ -167,7 +167,7 @@ header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--heade
 .selrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 select,input[type=search]{background:var(--card);border:1px solid var(--border);color:var(--t2);border-radius:7px;padding:6px 9px;font-size:12px}
 table{width:100%;border-collapse:collapse}
-thead th{text-align:left;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--t4);padding:10px 12px;border-bottom:1px solid var(--border);background:var(--header);position:sticky;top:52px}
+thead th{text-align:left;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--t4);padding:10px 12px;border-bottom:1px solid var(--border);background:var(--header)}
 tbody td{padding:11px 12px;border-bottom:1px solid var(--border);vertical-align:top;font-size:13px}
 tbody tr{cursor:pointer}
 tbody tr:hover{background:var(--cardh)}
